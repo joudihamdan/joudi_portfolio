@@ -1,4 +1,4 @@
-# My Portfolio
+# joudi_portfolio
 
 A modern, responsive portfolio website built with React and Vite.
 
@@ -82,7 +82,7 @@ npm run preview
 ## Project Structure
 
 ```
-my-portfolio/
+joudi_portfolio/
 ├── src/
 │   ├── components/
 │   │   ├── Header.jsx
@@ -96,6 +96,8 @@ my-portfolio/
 │   ├── App.css
 │   ├── main.jsx
 │   └── index.css
+├── public/
+│   └── hero-image.png
 ├── index.html
 ├── package.json
 ├── vite.config.js
@@ -110,4 +112,3 @@ my-portfolio/
 ## License
 
 This project is open source and available for personal use.
-
