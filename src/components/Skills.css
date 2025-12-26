@@ -26,8 +26,8 @@
 .skill-category:hover {
   transform: translateY(-5px);
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(245, 194, 199, 0.3);
-  border-color: rgba(245, 194, 199, 0.4);
+  box-shadow: 0 12px 40px rgba(179, 125, 130, 0.3);
+  border-color: rgba(179, 125, 130, 0.4);
 }
 
 .category-title {

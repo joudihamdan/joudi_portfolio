@@ -7,19 +7,19 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  --primary-color: #F5C2C7;
-  --secondary-color: #E8D5C4;
-  --accent-pink: #F5C2C7;
-  --accent-beige: #E8D5C4;
+  --primary-color: #e8b5c4;
+  --secondary-color: #f8ede5;
+  --accent-pink: #b37d82;
+  --accent-beige: #e8d5c4;
   --text-color: #2C2C2C;
   --text-dark: #1A1A1A;
   --text-light: #6B6B6B;
-  --bg-color: #FEFBF9;
-  --bg-light: #FAF7F3;
-  --bg-beige: #F5F0E8;
-  --border-color: #E8D5C4;
-  --glass-bg: rgba(255, 255, 255, 0.1);
-  --glass-border: rgba(255, 255, 255, 0.2);
+  --bg-color: #faf7f3;
+  --bg-light: #fefbf9;
+  --bg-beige: #f5f0e8;
+  --border-color: #e8d5c4;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.25);
 }
 
 :root[data-theme="dark"] {

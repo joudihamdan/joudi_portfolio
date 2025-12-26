@@ -91,17 +91,6 @@ function Hero({ isDarkMode }) {
         initial="hidden"
         animate="visible"
       >
-        <motion.div
-          animate={{
-            y: [0, -10, 0],
-          }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut"
-          }}
-          style={{ width: '100%' }}
-        >
         <motion.h1 
           className="hero-title-large"
           variants={titleVariants}
@@ -196,15 +185,14 @@ function Hero({ isDarkMode }) {
             Get In Touch
           </motion.button>
         </motion.div>
-        </motion.div>
       </motion.div>
-      <motion.div 
+      {/* <motion.div 
         className="scroll-indicator"
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
         <div className="mouse"></div>
-      </motion.div>
+      </motion.div> */}
     </section>
   )
 }

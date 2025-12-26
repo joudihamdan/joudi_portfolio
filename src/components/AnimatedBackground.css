@@ -6,7 +6,7 @@
   height: 100%;
   z-index: -1;
   overflow: hidden;
-  background: linear-gradient(135deg, #F5E6E0 0%, #E8D5C4 25%, #D4B8A8 50%, #C9A88F 75%, #B8957A 100%);
+  background: linear-gradient(135deg, #faf7f3 0%, #f5f0e8 25%, #e8d5c4 50%, #d4c4b0 75%, #c9a88f 100%);
 }
 
 .animated-background.dark {
@@ -24,7 +24,7 @@
 .blob-1 {
   width: 600px;
   height: 600px;
-  background: linear-gradient(135deg, #F5C2C7, #E8D5C4, #D4B8A8);
+  background: linear-gradient(135deg, #e8b5c4, #e8d5c4, #d4c4b0);
   top: -250px;
   left: -250px;
 }
@@ -36,7 +36,7 @@
 .blob-2 {
   width: 700px;
   height: 700px;
-  background: linear-gradient(135deg, #D4B8A8, #C9A88F, #B8957A);
+  background: linear-gradient(135deg, #d4c4b0, #c9a88f, #b89d8c);
   bottom: -350px;
   right: -350px;
 }
@@ -48,7 +48,7 @@
 .blob-3 {
   width: 500px;
   height: 500px;
-  background: linear-gradient(135deg, #E8D5C4, #F5C2C7, #D4B8A8);
+  background: linear-gradient(135deg, #e8d5c4, #e8b5c4, #d4c4b0);
   top: 50%;
   right: 10%;
 }
@@ -67,12 +67,12 @@
 }
 
 .waves-1 {
-  color: #D4B8A8;
+  color: #d4c4b0;
   z-index: 1;
 }
 
 .waves-2 {
-  color: #C9A88F;
+  color: #c9a88f;
   z-index: 0;
   bottom: -50px;
 }

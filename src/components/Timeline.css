@@ -58,7 +58,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 15px rgba(245, 194, 199, 0.3);
+  box-shadow: 0 4px 15px rgba(179, 125, 130, 0.3);
   z-index: 2;
   transition: all 0.3s ease;
 }
@@ -66,7 +66,7 @@
 .timeline-item:hover .timeline-marker,
 .timeline-item.active .timeline-marker {
   transform: scale(1.1);
-  box-shadow: 0 6px 25px rgba(245, 194, 199, 0.5);
+  box-shadow: 0 6px 25px rgba(179, 125, 130, 0.5);
   background: var(--accent-pink);
 }
 
@@ -90,8 +90,8 @@
 .timeline-item:hover .timeline-content,
 .timeline-item.active .timeline-content {
   background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(245, 194, 199, 0.3);
-  border-color: rgba(245, 194, 199, 0.4);
+  box-shadow: 0 12px 40px rgba(179, 125, 130, 0.3);
+  border-color: rgba(179, 125, 130, 0.4);
 }
 
 .timeline-year {

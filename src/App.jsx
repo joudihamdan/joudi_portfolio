@@ -51,13 +51,12 @@ function App() {
     <div className="App">
       <AnimatedBackground isDarkMode={isDarkMode} />
       <MouseTrail isDarkMode={isDarkMode} />
-      <DarkModeToggle isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
       <motion.div
         variants={containerVariants}
         initial="hidden"
         animate="visible"
       >
-        <Header isDarkMode={isDarkMode} />
+        <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
         <Hero isDarkMode={isDarkMode} />
         <About isDarkMode={isDarkMode} />
         <Timeline isDarkMode={isDarkMode} />

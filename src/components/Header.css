@@ -66,10 +66,65 @@
 
 .nav a:hover {
   color: var(--text-dark);
-  background: rgba(245, 194, 199, 0.2);
+  background: rgba(179, 125, 130, 0.2);
   backdrop-filter: blur(10px);
 }
 
+
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.dark-mode-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: relative;
+  padding: 0;
+}
+
+.dark-mode-btn:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(179, 125, 130, 0.4);
+}
+
+.dark-mode-btn svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--text-dark);
+  transition: all 0.3s ease;
+  position: absolute;
+}
+
+.dark-mode-btn .sun-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
+
+.dark-mode-btn .moon-icon {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.dark-mode-btn.dark .sun-icon {
+  opacity: 0;
+  transform: rotate(90deg);
+}
+
+.dark-mode-btn.dark .moon-icon {
+  opacity: 1;
+  transform: rotate(0deg);
+}
 
 .mobile-menu-btn {
   display: none;
@@ -77,6 +132,7 @@
   gap: 5px;
   background: none;
   padding: 5px;
+  border: none;
 }
 
 .mobile-menu-btn span {
@@ -88,6 +144,28 @@
 }
 
 @media (max-width: 768px) {
+  .header-container {
+    padding: 1rem 1.5rem;
+  }
+
+  .logo {
+    font-size: 1.2rem;
+  }
+
+  .header-actions {
+    gap: 0.75rem;
+  }
+
+  .dark-mode-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .dark-mode-btn svg {
+    width: 18px;
+    height: 18px;
+  }
+
   .mobile-menu-btn {
     display: flex;
   }

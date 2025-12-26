@@ -93,12 +93,12 @@
   width: 100%;
   background: linear-gradient(135deg, var(--accent-pink), var(--accent-beige));
   color: var(--text-dark);
-  box-shadow: 0 8px 25px rgba(245, 194, 199, 0.4);
+  box-shadow: 0 8px 25px rgba(179, 125, 130, 0.4);
 }
 
 .contact-form .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(245, 194, 199, 0.5);
+  box-shadow: 0 12px 35px rgba(179, 125, 130, 0.5);
 }
 
 @media (max-width: 968px) {
