@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './Header.css'
 
-function Header() {
+function Header({ isDarkMode }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
@@ -22,14 +22,15 @@ function Header() {
   }
 
   return (
-    <header className={`header ${isScrolled ? 'scrolled' : ''}`}>
+    <header className={`header ${isScrolled ? 'scrolled' : ''} ${isDarkMode ? 'dark' : ''}`}>
       <div className="header-container">
         <div className="logo" onClick={() => scrollToSection('hero')}>
           Portfolio
         </div>
         <nav className={`nav ${isMobileMenuOpen ? 'open' : ''}`}>
           <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about') }}>About</a>
-          <a href="#skills" onClick={(e) => { e.preventDefault(); scrollToSection('skills') }}>Skills</a>
+          <a href="#education" onClick={(e) => { e.preventDefault(); scrollToSection('education') }}>Education</a>
+          <a href="#timeline" onClick={(e) => { e.preventDefault(); scrollToSection('timeline') }}>Timeline</a>
           <a href="#projects" onClick={(e) => { e.preventDefault(); scrollToSection('projects') }}>Projects</a>
           <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}>Contact</a>
         </nav>

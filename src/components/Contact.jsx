@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
+import { motion } from 'framer-motion'
 import './Contact.css'
 
-function Contact() {
+function Contact({ isDarkMode }) {
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -23,7 +24,14 @@ function Contact() {
   }
 
   return (
-    <section id="contact" className="contact">
+    <motion.section 
+      id="contact" 
+      className="contact"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.3 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="section-header">
         <h2 className="section-title">Get In Touch</h2>
         <p className="section-subtitle">Let's work together on your next project</p>
@@ -34,21 +42,28 @@ function Contact() {
             <div className="info-icon">📧</div>
             <div>
               <h3>Email</h3>
-              <p>your.email@example.com</p>
+              <p>joudihamdan216@gmail.com</p>
             </div>
           </div>
           <div className="info-item">
             <div className="info-icon">📱</div>
             <div>
               <h3>Phone</h3>
-              <p>+1 (555) 123-4567</p>
+              <p>+963 936706169</p>
             </div>
           </div>
           <div className="info-item">
             <div className="info-icon">📍</div>
             <div>
               <h3>Location</h3>
-              <p>Your City, Country</p>
+              <p>Damascus, Syria</p>
+            </div>
+          </div>
+          <div className="info-item">
+            <div className="info-icon">💼</div>
+            <div>
+              <h3>LinkedIn</h3>
+              <p>www.linkedin.com/in/joudi-hamdan</p>
             </div>
           </div>
         </div>
@@ -91,7 +106,7 @@ function Contact() {
           </button>
         </form>
       </div>
-    </section>
+    </motion.section>
   )
 }
 

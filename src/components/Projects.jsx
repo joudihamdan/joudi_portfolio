@@ -1,63 +1,93 @@
 import React from 'react'
+import { motion } from 'framer-motion'
 import './Projects.css'
 
-function Projects() {
+function Projects({ isDarkMode }) {
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'A full-featured e-commerce website with shopping cart, payment integration, and admin dashboard.',
-      technologies: ['React', 'Node.js', 'MongoDB'],
-      image: '🛒'
+      title: 'CLICK CASH',
+      subtitle: 'Digital Money Transfer App',
+      description: 'Developed a mobile app enabling secure account creation with phone number verification (OTP), password, or fingerprint authentication. Implemented bank account management, money transfer system, transaction history, and Business accounts.',
+      technologies: ['Flutter', 'Firebase', 'Authentication', 'QR Code'],
+      icon: '💳',
+      size: 'large',
+      featured: true
     },
     {
-      title: 'Task Management App',
-      description: 'A collaborative task management application with real-time updates and team collaboration features.',
-      technologies: ['React', 'Firebase', 'TypeScript'],
-      image: '📋'
+      title: 'MERSOOL',
+      subtitle: 'Food Delivery App - Published on Google Play',
+      description: 'A cross-platform mobile application for browsing restaurants, selecting meals, and placing delivery orders. Built with Bloc and Clean Architecture, featuring Map API integration and real-time order tracking.',
+      technologies: ['Flutter', 'Bloc', 'Clean Architecture', 'Maps API'],
+      icon: '🍔',
+      size: 'medium',
+      featured: true
     },
     {
-      title: 'Weather Dashboard',
-      description: 'A beautiful weather dashboard showing current conditions and forecasts for multiple cities.',
-      technologies: ['React', 'API Integration', 'CSS3'],
-      image: '🌤️'
+      title: 'DAHAB CLINIC MANAGEMENT',
+      subtitle: 'Beauty Clinic App',
+      description: 'A mobile application for managing appointments and patient sessions. Built with GetX (MVC architecture), featuring appointment scheduling, patient profiles, customizable themes, and push notifications.',
+      technologies: ['Flutter', 'GetX', 'Firebase', 'MVC'],
+      icon: '💅',
+      size: 'medium',
+      featured: true
     },
     {
-      title: 'Social Media App',
-      description: 'A social networking platform with posts, comments, likes, and user profiles.',
-      technologies: ['React', 'Express', 'PostgreSQL'],
-      image: '📱'
+      title: 'RIDESHARE APP',
+      subtitle: 'Bicycle Rental System',
+      description: 'A mobile application for renting bicycles from city hubs. Developed with Bloc and Clean Architecture, featuring real-time geolocation and booking management.',
+      technologies: ['Flutter', 'Bloc', 'Clean Architecture', 'Maps'],
+      icon: '🚴',
+      size: 'small',
+      featured: false
+    },
+    {
+      title: 'Compiler for React',
+      subtitle: 'Custom JSX Parser',
+      description: 'Designed and built a React-based compiler using Antlr to parse and understand custom JSX syntax.',
+      technologies: ['React', 'Antlr', 'Compiler Design'],
+      icon: '⚙️',
+      size: 'small',
+      featured: false
     }
   ]
 
   return (
-    <section id="projects" className="projects">
+    <motion.section 
+      id="projects" 
+      className="projects"
+      initial={{ opacity: 0 }}
+      whileInView={{ opacity: 1 }}
+      viewport={{ once: true, amount: 0.2 }}
+      transition={{ duration: 0.6 }}
+    >
       <div className="section-header">
-        <h2 className="section-title">My Projects</h2>
-        <p className="section-subtitle">Some of my recent work</p>
+        <h2 className="section-title">Featured Projects</h2>
+        <p className="section-subtitle">A showcase of my work</p>
       </div>
-      <div className="projects-grid">
+      <div className="bento-grid">
         {projects.map((project, index) => (
-          <div key={index} className="project-card">
-            <div className="project-image">
-              <div className="project-emoji">{project.image}</div>
+          <motion.div 
+            key={index} 
+            className={`bento-item ${project.size} ${project.featured ? 'featured' : ''}`}
+            initial={{ opacity: 0, y: 50 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6, delay: index * 0.1 }}
+            whileHover={{ scale: 1.02, y: -5 }}
+          >
+            <div className="bento-icon">{project.icon}</div>
+            <h3 className="bento-title">{project.title}</h3>
+            <p className="bento-subtitle">{project.subtitle}</p>
+            <p className="bento-description">{project.description}</p>
+            <div className="bento-technologies">
+              {project.technologies.map((tech, techIndex) => (
+                <span key={techIndex} className="bento-tech">{tech}</span>
+              ))}
             </div>
-            <div className="project-content">
-              <h3 className="project-title">{project.title}</h3>
-              <p className="project-description">{project.description}</p>
-              <div className="project-technologies">
-                {project.technologies.map((tech, techIndex) => (
-                  <span key={techIndex} className="tech-tag">{tech}</span>
-                ))}
-              </div>
-              <div className="project-links">
-                <a href="#" className="project-link">View Project →</a>
-                <a href="#" className="project-link">GitHub →</a>
-              </div>
-            </div>
-          </div>
+          </motion.div>
         ))}
       </div>
-    </section>
+    </motion.section>
   )
 }
 
