@@ -17,17 +17,17 @@
 }
 
 .dark-mode-toggle:hover {
-  background: rgba(245, 194, 199, 0.2);
+  background: rgba(var(--accent-pink-rgb), 0.2);
   border-color: var(--accent-beige);
 }
 
 .dark-mode-toggle.dark {
   border-color: var(--accent-beige);
-  background: rgba(166, 124, 82, 0.1);
+  background: rgba(var(--accent-pink-rgb), 0.1);
 }
 
 .dark-mode-toggle.dark:hover {
-  background: rgba(166, 124, 82, 0.2);
+  background: rgba(var(--accent-pink-rgb), 0.2);
 }
 
 .toggle-icon {
