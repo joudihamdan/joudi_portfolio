@@ -24,7 +24,6 @@
 }
 
 .info-icon {
-  font-size: 2rem;
   width: 60px;
   height: 60px;
   display: flex;
@@ -33,6 +32,17 @@
   background: linear-gradient(135deg, var(--accent-pink), var(--accent-beige));
   border-radius: 12px;
   flex-shrink: 0;
+  color: var(--text-dark);
+}
+
+.info-item a {
+  color: var(--text-light);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.info-item a:hover {
+  color: var(--accent-pink);
 }
 
 .info-item h3 {
@@ -46,14 +56,39 @@
   color: var(--text-light);
 }
 
+.contact-cv-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  align-self: flex-start;
+  margin-top: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 50px;
+  font-weight: 600;
+  color: var(--text-dark);
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border: 1px solid var(--glass-border);
+  box-shadow: 0 4px 15px var(--shadow-soft);
+  transition: all 0.3s ease;
+}
+
+.contact-cv-btn:hover {
+  background: rgba(var(--accent-pink-rgb), 0.1);
+  border-color: var(--accent-pink);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 25px rgba(var(--accent-pink-rgb), 0.3);
+}
+
 .contact-form {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--surface);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 2rem;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 8px 32px var(--shadow-soft);
 }
 
 .form-group {
@@ -71,17 +106,26 @@
 .form-group textarea {
   width: 100%;
   padding: 0.875rem;
-  border: 2px solid var(--border-color);
-  border-radius: 8px;
+  border: 1px solid var(--surface-border);
+  border-radius: 10px;
   font-size: 1rem;
   font-family: inherit;
-  transition: border-color 0.3s ease;
+  background: var(--surface);
+  color: var(--text-color);
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-light);
+  opacity: 0.7;
 }
 
 .form-group input:focus,
 .form-group textarea:focus {
   outline: none;
-  border-color: var(--primary-color);
+  border-color: var(--accent-strong);
+  background: var(--surface-2);
 }
 
 .form-group textarea {
@@ -93,12 +137,12 @@
   width: 100%;
   background: linear-gradient(135deg, var(--accent-pink), var(--accent-beige));
   color: var(--text-dark);
-  box-shadow: 0 8px 25px rgba(179, 125, 130, 0.4);
+  box-shadow: 0 8px 25px var(--glow-border);
 }
 
 .contact-form .btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 35px rgba(179, 125, 130, 0.5);
+  box-shadow: 0 12px 35px var(--glow-border);
 }
 
 @media (max-width: 968px) {

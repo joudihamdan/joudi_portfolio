@@ -1,27 +1,26 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { GraduationCap } from 'lucide-react'
 import './Education.css'
 
-function Education({ isDarkMode }) {
+function Education() {
   const educationData = [
     {
       degree: "Bachelor's Degree in Information Technology Engineering",
-      university: "Damascus University",
-      period: "Sep 2020 – Sep 2025",
-      specialization: "Software Engineering",
-      description: "Focused on software development, system design, and engineering principles. Specialized in Software Engineering with emphasis on modern development practices and clean architecture.",
-      icon: "🎓"
-    }
+      university: 'Damascus University',
+      period: 'Sep 2020 – 2025',
+      specialization: 'Software Engineering',
+      description:
+        'Graduated with a focus on software development, system design, and engineering principles — providing a strong foundation for QA work across the SDLC.',
+    },
   ]
 
   const containerVariants = {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: {
-        staggerChildren: 0.2
-      }
-    }
+      transition: { staggerChildren: 0.2 },
+    },
   }
 
   const itemVariants = {
@@ -29,15 +28,13 @@ function Education({ isDarkMode }) {
     visible: {
       opacity: 1,
       y: 0,
-      transition: {
-        duration: 0.6
-      }
-    }
+      transition: { duration: 0.6 },
+    },
   }
 
   return (
-    <motion.section 
-      id="education" 
+    <motion.section
+      id="education"
       className="education"
       initial="hidden"
       whileInView="visible"
@@ -46,7 +43,7 @@ function Education({ isDarkMode }) {
     >
       <div className="section-header">
         <h2 className="section-title">Education</h2>
-        <p className="section-subtitle">Academic journey and achievements</p>
+        <p className="section-subtitle">Academic foundation in software engineering</p>
       </div>
       <div className="education-container">
         {educationData.map((edu, index) => (
@@ -56,7 +53,9 @@ function Education({ isDarkMode }) {
             variants={itemVariants}
             whileHover={{ scale: 1.02, y: -5 }}
           >
-            <div className="education-icon">{edu.icon}</div>
+            <div className="education-icon">
+              <GraduationCap size={32} strokeWidth={1.5} />
+            </div>
             <div className="education-content">
               <div className="education-period">{edu.period}</div>
               <h3 className="education-degree">{edu.degree}</h3>
@@ -69,9 +68,12 @@ function Education({ isDarkMode }) {
           </motion.div>
         ))}
       </div>
+      <div className="education-languages">
+        <span className="language-badge">Arabic (Native)</span>
+        <span className="language-badge">English (Professional Working Proficiency)</span>
+      </div>
     </motion.section>
   )
 }
 
 export default Education
-

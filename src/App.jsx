@@ -3,10 +3,11 @@ import { motion } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
-import Education from './components/Education'
-import Timeline from './components/Timeline'
+import Experience from './components/Experience'
 import Skills from './components/Skills'
 import Projects from './components/Projects'
+import Community from './components/Community'
+import Education from './components/Education'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
 import AnimatedBackground from './components/AnimatedBackground'
@@ -42,9 +43,9 @@ function App() {
     visible: {
       opacity: 1,
       transition: {
-        staggerChildren: 0.1
-      }
-    }
+        staggerChildren: 0.1,
+      },
+    },
   }
 
   return (
@@ -57,18 +58,18 @@ function App() {
         animate="visible"
       >
         <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
-        <Hero isDarkMode={isDarkMode} />
-        <About isDarkMode={isDarkMode} />
-        <Timeline isDarkMode={isDarkMode} />
-        <Skills isDarkMode={isDarkMode} />
-        <Projects isDarkMode={isDarkMode} />
-        <Education isDarkMode={isDarkMode} />
-        <Contact isDarkMode={isDarkMode} />
-        <Footer isDarkMode={isDarkMode} />
+        <Hero />
+        <About />
+        <Experience />
+        <Skills />
+        <Projects />
+        <Community />
+        <Education />
+        <Contact />
+        <Footer />
       </motion.div>
     </div>
   )
 }
 
 export default App
-

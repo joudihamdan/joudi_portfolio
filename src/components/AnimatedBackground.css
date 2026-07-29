@@ -9,6 +9,16 @@
   background-color: var(--bg-color);
 }
 
+/* Light mode: soft, sophisticated multi-step warm gradient
+   (cream top-left -> pale coral top-right -> soft lavender bottom-right) */
+.animated-background:not(.dark) {
+  background:
+    radial-gradient(1100px 780px at 14% 8%, #FFFAF5 0%, rgba(255, 250, 245, 0) 58%),
+    radial-gradient(950px 760px at 90% 14%, #FCE8E4 0%, rgba(252, 232, 228, 0) 52%),
+    radial-gradient(1050px 900px at 84% 94%, #EFE6F4 0%, rgba(239, 230, 244, 0) 56%),
+    linear-gradient(135deg, #FFFBF8 0%, #FBF2F3 52%, #F1E9F6 100%);
+}
+
 .animated-background.dark {
   background-color: var(--bg-color);
 }
@@ -30,7 +40,7 @@
 }
 
 .animated-background.dark .blob-1 {
-  background: linear-gradient(135deg, #3D2B29, #2A1D1B, transparent);
+  background: linear-gradient(135deg, #3A2A30, #211D26, transparent);
 }
 
 .blob-2 {
@@ -42,7 +52,7 @@
 }
 
 .animated-background.dark .blob-2 {
-  background: linear-gradient(135deg, #2A1D1B, #1A1615, transparent);
+  background: linear-gradient(135deg, #241F2A, #16141A, transparent);
 }
 
 .blob-3 {
@@ -54,7 +64,7 @@
 }
 
 .animated-background.dark .blob-3 {
-  background: linear-gradient(135deg, #3D3331, #241F1E, transparent);
+  background: linear-gradient(135deg, #342A38, #1E1B22, transparent);
 }
 
 .waves {
@@ -80,10 +90,10 @@
 }
 
 .animated-background.dark .waves-1 {
-  color: #3D3331;
+  color: #2A2530;
 }
 
 .animated-background.dark .waves-2 {
-  color: #2E2725;
+  color: #201D26;
 }
 

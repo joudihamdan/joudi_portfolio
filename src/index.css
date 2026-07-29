@@ -7,54 +7,76 @@
 @import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
-  /* Soft & Elegant Palette */
+  /* Soft & Elegant Palette (Light) */
   --palette-lightest: #FFFBFB; /* Pure Off-White */
   --palette-light: #FDF2F2;    /* Very Light Beige/Pink hint */
   --palette-soft: #F9E2E2;     /* Softest Pink */
   --palette-medium: #F4C7C7;   /* Elegant Muted Pink */
-  --palette-darkest: #8E736E;  /* Warm Earthy Brown-Grey (Comfortable for eyes) */
+  --palette-darkest: #8E736E;  /* Warm Earthy Brown-Grey */
 
   --primary-color: #F4C7C7;
   --secondary-color: var(--palette-darkest);
-  --accent-pink: #F4C7C7;
+  --accent-pink: #F4C7C7;      /* decorative rose */
   --accent-beige: var(--palette-soft);
-  
+  --accent-strong: #A85062;    /* readable rose for accent text */
+
   --accent-pink-rgb: 244, 199, 199;
   --accent-beige-rgb: 249, 226, 226;
+  --accent-strong-rgb: 168, 80, 98;
 
   --text-color: #4A3A35;
   --text-dark: #2D2321;
-  --text-light: #7D6B68;
-  
+  --text-light: #6E5B57;
+
   --bg-color: var(--palette-lightest);
   --bg-light: #FFFFFF;
   --bg-beige: var(--palette-light);
   --border-color: var(--palette-soft);
-  
+
   --glass-bg: rgba(255, 255, 255, 0.5);
   --glass-border: rgba(244, 199, 199, 0.3);
+
+  /* Semantic, theme-aware surfaces */
+  --surface: rgba(255, 255, 255, 0.55);
+  --surface-2: rgba(255, 255, 255, 0.78);
+  --surface-solid: rgba(255, 255, 255, 0.95);
+  --surface-border: rgba(180, 130, 138, 0.22);
+  --shadow-soft: rgba(90, 60, 66, 0.10);
+  --glow: rgba(168, 80, 98, 0.16);
+  --glow-border: rgba(168, 80, 98, 0.30);
 }
 
 :root[data-theme="dark"] {
-  --primary-color: #F4C7C7;
-  --secondary-color: var(--palette-medium);
-  --accent-pink: #F4C7C7;
-  --accent-beige: #4A3A35;
+  /* Elegant Charcoal + Muted Rose (Dark) */
+  --primary-color: #C98B96;
+  --secondary-color: #C98B96;
+  --accent-pink: #C98B96;      /* muted rose, decorative */
+  --accent-beige: #7E5760;     /* deep rose for gradients */
+  --accent-strong: #E6B2BC;    /* readable rose for accent text */
 
-  --accent-pink-rgb: 244, 199, 199;
-  --accent-beige-rgb: 74, 58, 53;
+  --accent-pink-rgb: 201, 139, 150;
+  --accent-beige-rgb: 126, 87, 96;
+  --accent-strong-rgb: 230, 178, 188;
 
-  --text-color: #FDF2F2;
-  --text-dark: #FFFFFF;
-  --text-light: #BCAAA4;
-  
-  --bg-color: #1A1615;
-  --bg-light: #241F1E;
-  --bg-beige: #2E2725;
-  --border-color: #3D3331;
-  
-  --glass-bg: rgba(26, 22, 21, 0.7);
-  --glass-border: rgba(244, 199, 199, 0.15);
+  --text-color: #ECE6E9;
+  --text-dark: #F7F2F4;
+  --text-light: #A99AA1;
+
+  --bg-color: #16141A;         /* deep charcoal, subtle warmth (not pure black) */
+  --bg-light: #1E1B22;
+  --bg-beige: #26222C;         /* chip background */
+  --border-color: #332E39;
+
+  --glass-bg: rgba(255, 255, 255, 0.05);
+  --glass-border: rgba(255, 255, 255, 0.10);
+
+  --surface: rgba(255, 255, 255, 0.045);
+  --surface-2: rgba(255, 255, 255, 0.08);
+  --surface-solid: rgba(30, 27, 34, 0.96);
+  --surface-border: rgba(255, 255, 255, 0.09);
+  --shadow-soft: rgba(0, 0, 0, 0.38);
+  --glow: rgba(201, 139, 150, 0.16);
+  --glow-border: rgba(201, 139, 150, 0.34);
 }
 
 body {
@@ -66,7 +88,8 @@ body {
   color: var(--text-color);
   line-height: 1.6;
   scroll-behavior: smooth;
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background-color: var(--bg-color);
+  transition: background-color 0.4s ease, color 0.4s ease;
 }
 
 code {
@@ -84,4 +107,3 @@ button {
   border: none;
   font-family: inherit;
 }
-

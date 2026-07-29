@@ -11,7 +11,7 @@ html {
 
 /* Section spacing */
 section {
-  padding: 80px 20px;
+  padding: 96px 24px;
   width: 100%;
   position: relative;
   background: transparent !important;
@@ -20,14 +20,18 @@ section {
 /* Shared section styles */
 .section-header {
   text-align: center;
-  margin-bottom: 4rem;
+  margin-bottom: 3.25rem;
+  max-width: 640px;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .section-title {
-  font-size: 2.5rem;
+  font-size: 2.4rem;
   font-weight: 700;
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
   color: var(--text-dark);
+  letter-spacing: -0.01em;
 }
 
 .section-subtitle {
@@ -37,7 +41,7 @@ section {
 
 @media (max-width: 768px) {
   section {
-    padding: 60px 15px;
+    padding: 64px 18px;
   }
 
   .section-header {

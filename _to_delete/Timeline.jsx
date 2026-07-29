@@ -1,5 +1,19 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import {
+  Wallet,
+  UtensilsCrossed,
+  CalendarCheck,
+  Bike,
+  Code2,
+  GraduationCap,
+  Users,
+  Terminal,
+  KanbanSquare,
+  Target,
+  Smartphone,
+  ShieldCheck,
+} from 'lucide-react'
 import './Timeline.css'
 
 function Timeline({ isDarkMode }) {
@@ -12,7 +26,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Bachelor\'s Degree in Information Technology Engineering',
       description: 'Started my journey in Software Engineering specialization',
       type: 'education',
-      icon: '🎓'
+      Icon: GraduationCap,
     },
     {
       year: '2022',
@@ -20,7 +34,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Coach',
       description: 'Coached and mentored young developers in their hackathon journey',
       type: 'volunteer',
-      icon: '👨‍🏫'
+      Icon: Users,
     },
     {
       year: '2022',
@@ -28,7 +42,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Participant',
       description: 'Competed in competitive programming contest',
       type: 'participation',
-      icon: '💻'
+      Icon: Terminal,
     },
     {
       year: '2024',
@@ -36,7 +50,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Mobile Application Developer',
       description: 'Developed a mobile application for renting bicycles from city hubs. Built with Bloc and Clean Architecture, featuring real-time geolocation and booking management.',
       type: 'project',
-      icon: '🚴',
+      Icon: Bike,
       technologies: ['Flutter', 'Bloc', 'Clean Architecture', 'Maps API']
     },
     {
@@ -45,7 +59,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Mobile Application Developer',
       description: 'A mobile application for managing appointments and patient sessions in a beauty clinic. Built with GetX (MVC architecture), featuring appointment scheduling, patient profiles, customizable themes, and push notifications.',
       type: 'project',
-      icon: '💅',
+      Icon: CalendarCheck,
       technologies: ['Flutter', 'GetX', 'Firebase', 'MVC']
     },
     {
@@ -54,7 +68,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Project',
       description: 'Designed and built a React-based compiler using Antlr to parse and understand custom JSX syntax.',
       type: 'project',
-      icon: '⚙️',
+      Icon: Code2,
       technologies: ['React', 'Antlr', 'Compiler Design']
     },
     {
@@ -63,7 +77,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Scrum Master Experience',
       description: 'Gained practical experience in managing projects using Jira, including creating product backlogs, defining user stories, and organizing sprint boards.',
       type: 'experience',
-      icon: '📋',
+      Icon: KanbanSquare,
       technologies: ['Jira', 'Agile', 'Scrum']
     },
     {
@@ -72,7 +86,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Organizer',
       description: 'Led coordination and logistics for the competitive programming contest',
       type: 'volunteer',
-      icon: '🎯'
+      Icon: Target,
     },
     {
       year: '2024-2025',
@@ -80,7 +94,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Sanad',
       description: 'Supported and mentored junior developers in learning Flutter',
       type: 'volunteer',
-      icon: '👨‍💼'
+      Icon: Smartphone,
     },
     {
       year: '2025',
@@ -88,7 +102,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Food Delivery App - Published on Google Play',
       description: 'A cross-platform mobile application for browsing restaurants, selecting meals, and placing delivery orders. Built with Bloc and Clean Architecture, featuring Map API integration and real-time order tracking.',
       type: 'project',
-      icon: '🍔',
+      Icon: UtensilsCrossed,
       technologies: ['Flutter', 'Bloc', 'Clean Architecture', 'Maps API']
     },
     {
@@ -97,7 +111,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'Digital Money Transfer App',
       description: 'Developed a mobile app enabling secure account creation with phone number verification (OTP), password, or fingerprint authentication. Implemented bank account management, money transfer system, transaction history, and Business accounts.',
       type: 'project',
-      icon: '💳',
+      Icon: Wallet,
       technologies: ['Flutter', 'Firebase', 'Authentication', 'QR Code']
     },
     {
@@ -106,7 +120,7 @@ function Timeline({ isDarkMode }) {
       subtitle: 'QA Tester & Scrum Master',
       description: 'Currently working as QA Tester and Scrum Master, ensuring quality assurance and facilitating agile development processes.',
       type: 'experience',
-      icon: '✅',
+      Icon: ShieldCheck,
       technologies: ['QA Testing', 'Scrum', 'Agile']
     }
   ]
@@ -139,7 +153,11 @@ function Timeline({ isDarkMode }) {
             whileHover={{ scale: 1.02, x: 10 }}
           >
             <div className="timeline-marker">
-              <span className="timeline-icon">{event.icon}</span>
+              {event.Icon && (
+                <span className="timeline-icon">
+                  <event.Icon size={22} strokeWidth={1.5} />
+                </span>
+              )}
             </div>
             <div className="timeline-content">
               <div className="timeline-year">{event.year}</div>

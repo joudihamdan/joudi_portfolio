@@ -2,25 +2,68 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import './Skills.css'
 
-function Skills({ isDarkMode }) {
+function Skills() {
   const skillCategories = [
     {
-      title: 'Flutter',
-      skills: ['Bloc & GetX', 'Clean Architecture', 'Animations', 'UI/UX', 'Local Storage', 'Maps', 'Geolocation']
+      title: 'Quality Assurance',
+      skills: [
+        'Manual Testing',
+        'API Testing',
+        'Functional Testing',
+        'Regression Testing',
+        'Exploratory Testing',
+        'Test Case Design',
+        'Bug Reporting',
+        'Defect Lifecycle',
+        'SDLC / STLC',
+        'Basic Test Automation',
+      ],
     },
     {
-      title: 'Tools & Technologies',
-      skills: ['Firebase (Auth, Firestore, Storage)', 'Git', 'GitHub', 'GitLab', 'SDLC', 'Design Patterns', 'Agile', 'Jira', 'Odoo']
+      title: 'Agile & Process',
+      skills: [
+        'Agile / Scrum',
+        'Sprint Planning',
+        'Backlog Refinement',
+        'Acceptance Criteria Validation',
+        'Requirement Analysis',
+        'Test Planning',
+        'Release Verification',
+      ],
     },
     {
-      title: 'Soft Skills',
-      skills: ['Problem-Solving', 'Design Thinking', 'Communication', 'Teamwork', 'Adaptability', 'Willingness to Learn']
-    }
+      title: 'Tools',
+      skills: ['Jira', 'GitLab', 'Postman', 'Swagger', 'Firebase', 'Git', 'GitHub'],
+    },
+    {
+      title: 'Software Engineering',
+      skills: [
+        'Flutter',
+        'Dart',
+        'REST APIs',
+        'JSON',
+        'Clean Architecture',
+        'Bloc / GetX',
+        'React',
+      ],
+    },
+    {
+      title: 'Professional Skills',
+      skills: [
+        'Analytical Thinking',
+        'Attention to Detail',
+        'Problem-Solving',
+        'Communication',
+        'Team Collaboration',
+        'Adaptability',
+        'Time Management',
+      ],
+    },
   ]
 
   return (
-    <motion.section 
-      id="skills" 
+    <motion.section
+      id="skills"
       className="skills"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
@@ -29,12 +72,14 @@ function Skills({ isDarkMode }) {
     >
       <div className="section-header">
         <h2 className="section-title">Skills</h2>
-        <p className="section-subtitle">Technologies I work with</p>
+        <p className="section-subtitle">
+          Testing expertise backed by hands-on development experience
+        </p>
       </div>
       <div className="skills-grid">
         {skillCategories.map((category, index) => (
-          <motion.div 
-            key={index} 
+          <motion.div
+            key={index}
             className="skill-category"
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
@@ -58,4 +103,3 @@ function Skills({ isDarkMode }) {
 }
 
 export default Skills
-

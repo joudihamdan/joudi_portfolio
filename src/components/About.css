@@ -33,6 +33,50 @@
   line-height: 1.8;
 }
 
+.qa-highlights {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin: 2.5rem 0 1rem;
+  padding: 1.75rem;
+  background: var(--surface);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 15px;
+  border: 1px solid var(--surface-2);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+}
+
+.qa-highlight-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.qa-highlight-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.qa-highlight-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.qa-highlight-tag {
+  padding: 0.35rem 0.85rem;
+  background: var(--bg-beige);
+  color: var(--text-dark);
+  border-radius: 20px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  border: 1px solid var(--border-color);
+}
+
 .about-roles {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
@@ -43,24 +87,28 @@
 .role-card {
   text-align: center;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--surface);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 15px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  border: 1px solid var(--surface-border);
   transition: all 0.3s ease;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 32px var(--shadow-soft);
 }
 
 .role-card:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(179, 125, 130, 0.3);
-  border-color: rgba(179, 125, 130, 0.4);
+  background: var(--surface-2);
+  box-shadow: 0 12px 40px var(--glow);
+  border-color: var(--glow-border);
 }
 
 .role-icon {
-  font-size: 2.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dark);
+  opacity: 0.85;
   margin-bottom: 1rem;
 }
 
@@ -87,20 +135,20 @@
 .stat-item {
   text-align: center;
   padding: 2rem;
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--surface);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 8px 32px var(--shadow-soft);
   transition: all 0.3s ease;
 }
 
 .stat-item:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(179, 125, 130, 0.3);
-  border-color: rgba(179, 125, 130, 0.4);
+  background: var(--surface-2);
+  box-shadow: 0 12px 40px var(--glow);
+  border-color: var(--glow-border);
 }
 
 .stat-number {
@@ -122,6 +170,11 @@
 @media (max-width: 768px) {
   .section-title {
     font-size: 2rem;
+  }
+
+  .qa-highlights {
+    grid-template-columns: 1fr;
+    gap: 1.75rem;
   }
 
   .about-roles {

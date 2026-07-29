@@ -13,21 +13,21 @@
 }
 
 .skill-category {
-  background: rgba(255, 255, 255, 0.1);
+  background: var(--surface);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 2rem;
   border-radius: 12px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  border: 1px solid var(--surface-border);
+  box-shadow: 0 8px 32px var(--shadow-soft);
   transition: all 0.3s ease;
 }
 
 .skill-category:hover {
   transform: translateY(-5px);
-  background: rgba(255, 255, 255, 0.15);
-  box-shadow: 0 12px 40px rgba(179, 125, 130, 0.3);
-  border-color: rgba(179, 125, 130, 0.4);
+  background: var(--surface-2);
+  box-shadow: 0 12px 40px var(--glow);
+  border-color: var(--glow-border);
 }
 
 .category-title {

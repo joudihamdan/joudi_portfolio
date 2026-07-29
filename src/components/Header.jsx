@@ -21,21 +21,38 @@ function Header({ isDarkMode, toggleDarkMode }) {
     }
   }
 
+  const navItems = [
+    { id: 'about', label: 'About' },
+    { id: 'experience', label: 'Experience' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
+    { id: 'community', label: 'Mentorship' },
+    { id: 'education', label: 'Education' },
+    { id: 'contact', label: 'Contact' },
+  ]
+
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''} ${isDarkMode ? 'dark' : ''}`}>
       <div className="header-container">
         <div className="logo" onClick={() => scrollToSection('hero')}>
-          Portfolio
+          Joudi Hamdan
         </div>
         <nav className={`nav ${isMobileMenuOpen ? 'open' : ''}`}>
-          <a href="#about" onClick={(e) => { e.preventDefault(); scrollToSection('about') }}>About</a>
-          <a href="#education" onClick={(e) => { e.preventDefault(); scrollToSection('education') }}>Education</a>
-          <a href="#timeline" onClick={(e) => { e.preventDefault(); scrollToSection('timeline') }}>Timeline</a>
-          <a href="#projects" onClick={(e) => { e.preventDefault(); scrollToSection('projects') }}>Projects</a>
-          <a href="#contact" onClick={(e) => { e.preventDefault(); scrollToSection('contact') }}>Contact</a>
+          {navItems.map((item) => (
+            <a
+              key={item.id}
+              href={`#${item.id}`}
+              onClick={(e) => {
+                e.preventDefault()
+                scrollToSection(item.id)
+              }}
+            >
+              {item.label}
+            </a>
+          ))}
         </nav>
         <div className="header-actions">
-          <button 
+          <button
             className={`dark-mode-btn ${isDarkMode ? 'dark' : ''}`}
             onClick={toggleDarkMode}
             aria-label="Toggle dark mode"
@@ -55,7 +72,7 @@ function Header({ isDarkMode, toggleDarkMode }) {
               <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
             </svg>
           </button>
-          <button 
+          <button
             className={`mobile-menu-btn ${isMobileMenuOpen ? 'active' : ''}`}
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             aria-label="Toggle menu"
@@ -71,4 +88,3 @@ function Header({ isDarkMode, toggleDarkMode }) {
 }
 
 export default Header
-
