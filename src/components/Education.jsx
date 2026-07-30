@@ -68,10 +68,6 @@ function Education() {
           </motion.div>
         ))}
       </div>
-      <div className="education-languages">
-        <span className="language-badge">Arabic (Native)</span>
-        <span className="language-badge">English (Professional Working Proficiency)</span>
-      </div>
     </motion.section>
   )
 }

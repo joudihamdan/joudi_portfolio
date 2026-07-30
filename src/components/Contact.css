@@ -145,6 +145,45 @@
   box-shadow: 0 12px 35px var(--glow-border);
 }
 
+.contact-form .btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+  transform: none;
+}
+
+/* Honeypot field — visually hidden but present in the DOM for bots */
+.hp-field {
+  position: absolute !important;
+  left: -5000px !important;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.form-status {
+  margin-top: 0.9rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+.form-status.success {
+  color: #2f9e6f;
+}
+
+.form-status.error {
+  color: #d1534e;
+}
+
+:root[data-theme="dark"] .form-status.success {
+  color: #64cfa0;
+}
+
+:root[data-theme="dark"] .form-status.error {
+  color: #f0908b;
+}
+
 @media (max-width: 968px) {
   .contact-content {
     grid-template-columns: 1fr;

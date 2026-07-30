@@ -16,7 +16,10 @@ function Contact() {
     name: '',
     email: '',
     message: '',
+    company: '', // honeypot — real users leave this empty
   })
+  const [status, setStatus] = useState('idle') // idle | sending | success | error
+  const [errorMsg, setErrorMsg] = useState('')
 
   const handleChange = (e) => {
     setFormData({
@@ -25,10 +28,30 @@ function Contact() {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault()
-    alert('Thank you for your message! I will get back to you soon.')
-    setFormData({ name: '', email: '', message: '' })
+    if (status === 'sending') return
+    setStatus('sending')
+    setErrorMsg('')
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(formData),
+      })
+
+      if (!res.ok) {
+        const data = await res.json().catch(() => ({}))
+        throw new Error(data.error || 'Something went wrong. Please try again.')
+      }
+
+      setStatus('success')
+      setFormData({ name: '', email: '', message: '', company: '' })
+    } catch (err) {
+      setStatus('error')
+      setErrorMsg(err.message || 'Could not send your message. Please email me directly.')
+    }
   }
 
   const contactItems = [
@@ -136,9 +159,33 @@ function Contact() {
               required
             ></textarea>
           </div>
-          <button type="submit" className="btn btn-primary">
-            Send Message
+
+          {/* Honeypot: hidden from real users; bots that fill it are silently dropped */}
+          <input
+            type="text"
+            name="company"
+            className="hp-field"
+            value={formData.company}
+            onChange={handleChange}
+            tabIndex={-1}
+            autoComplete="off"
+            aria-hidden="true"
+          />
+
+          <button type="submit" className="btn btn-primary" disabled={status === 'sending'}>
+            {status === 'sending' ? 'Sending…' : 'Send Message'}
           </button>
+
+          {status === 'success' && (
+            <p className="form-status success" role="status">
+              Thanks! Your message was sent — I'll get back to you soon.
+            </p>
+          )}
+          {status === 'error' && (
+            <p className="form-status error" role="alert">
+              {errorMsg}
+            </p>
+          )}
         </form>
       </div>
     </motion.section>
