@@ -6,13 +6,16 @@
   "scripts": {
     "dev": "vite",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "start": "node server.js"
   },
   "dependencies": {
+    "cors": "^2.8.6",
+    "express": "^4.22.2",
     "framer-motion": "^11.18.2",
     "install": "^0.13.0",
     "locally": "^0.2.1",
-    "lucide-react": "^1.24.0",
+    "lucide-react": "^1.27.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "to": "^0.2.9"
@@ -22,5 +25,8 @@
     "@types/react-dom": "^18.2.17",
     "@vitejs/plugin-react": "^4.2.1",
     "vite": "^7.3.0"
+  },
+  "engines": {
+    "node": ">=18"
   }
 }
