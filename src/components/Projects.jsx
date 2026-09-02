@@ -73,7 +73,7 @@ function Projects() {
       className="projects"
       initial={{ opacity: 0 }}
       whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
+      viewport={{ once: true, amount: 0.01 }}
       transition={{ duration: 0.6 }}
     >
       <div className="section-header">
@@ -89,7 +89,7 @@ function Projects() {
             className={`bento-item ${project.size} featured ${project.type === 'dev' ? 'is-dev' : ''}`}
             initial={{ opacity: 0, y: 50 }}
             whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
+            viewport={{ once: true, margin: "-50px" }}
             transition={{ duration: 0.6, delay: index * 0.08 }}
             whileHover={{ scale: 1.02, y: -5 }}
           >
@@ -132,7 +132,7 @@ function Projects() {
               className="bento-item projects-secondary-card"
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
+             viewport={{ once: true, margin: "-50px" }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               whileHover={{ scale: 1.02, y: -5 }}
             >
