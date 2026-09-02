@@ -1,6 +1,6 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Users, Terminal, Target, Smartphone, Mic2, BookOpen } from 'lucide-react'
+import { Users, Terminal, Target, Mic2, BookOpen } from 'lucide-react'
 import './Community.css'
 
 function Community() {
@@ -12,14 +12,6 @@ function Community() {
       description:
         'Created and scripted educational content for university-level students across YouTube and live sessions, designing structured lecture materials that improved engagement and clarity.',
       Icon: BookOpen,
-    },
-    {
-      period: '2024 – 2025',
-      title: 'Assistant Flutter Coach',
-      organization: 'Sanad Development Team',
-      description:
-        'Supported and mentored junior developers in learning Flutter, simplifying technical concepts and guiding hands-on mobile development practice.',
-      Icon: Smartphone,
     },
     {
       period: '2024',

@@ -6,11 +6,21 @@ function Header({ isDarkMode, toggleDarkMode }) {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
 
   useEffect(() => {
+    // Coalesce scroll events into one read per frame; passive so the listener
+    // never blocks the browser's scrolling thread.
+    let frame = null
     const handleScroll = () => {
-      setIsScrolled(window.scrollY > 50)
+      if (frame !== null) return
+      frame = requestAnimationFrame(() => {
+        frame = null
+        setIsScrolled(window.scrollY > 50)
+      })
     }
-    window.addEventListener('scroll', handleScroll)
-    return () => window.removeEventListener('scroll', handleScroll)
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      if (frame !== null) cancelAnimationFrame(frame)
+    }
   }, [])
 
   const scrollToSection = (id) => {

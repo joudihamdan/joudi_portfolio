@@ -1,6 +1,5 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { ShieldCheck, Smartphone, KanbanSquare } from 'lucide-react'
 import './About.css'
 
 function About() {
@@ -8,12 +7,12 @@ function About() {
     hidden: { opacity: 0 },
     visible: {
       opacity: 1,
-      transition: { staggerChildren: 0.2 },
+      transition: { staggerChildren: 0.15 },
     },
   }
 
   const itemVariants = {
-    hidden: { opacity: 0, y: 30 },
+    hidden: { opacity: 0, y: 24 },
     visible: {
       opacity: 1,
       y: 0,
@@ -21,40 +20,27 @@ function About() {
     },
   }
 
-  const qaHighlights = [
+  const qualitySteps = [
     {
-      label: 'Testing',
-      items: ['Manual', 'API', 'Functional', 'Regression', 'Exploratory'],
+      title: 'Understand',
+      description: 'Analyze requirements, user flows, and expected behavior.',
     },
     {
-      label: 'QA Tools',
-      items: ['Jira', 'GitLab', 'Postman', 'Swagger'],
+      title: 'Test',
+      description:
+        'Explore edge cases, failures, and unexpected behavior beyond the happy path.',
     },
     {
-      label: 'Practices',
-      items: ['Test Case Design', 'Defect Lifecycle', 'SDLC / STLC', 'Agile / Scrum'],
+      title: 'Improve',
+      description:
+        'Communicate findings clearly and collaborate with the team to improve product quality.',
     },
   ]
 
-  const roles = [
-    {
-      Icon: ShieldCheck,
-      title: 'Quality Assurance Engineer',
-      description:
-        'Manual and API testing, test case design, defect tracking, and release validation in Agile teams.',
-    },
-    {
-      Icon: Smartphone,
-      title: 'Mobile Software Engineer',
-      description:
-        'Flutter development with Bloc and GetX — understanding code, APIs, and architecture from the inside.',
-    },
-    {
-      Icon: KanbanSquare,
-      title: 'Agile Practitioner',
-      description:
-        'Scrum ceremonies, backlog refinement, acceptance criteria validation, and cross-functional collaboration.',
-    },
+  const stats = [
+    { value: '2+', label: 'QA & Agile Roles' },
+    { value: '4+', label: 'Engineering Projects' },
+    { value: '1', label: 'Published App' },
   ]
 
   return (
@@ -68,69 +54,47 @@ function About() {
     >
       <div className="section-header">
         <h2 className="section-title">About Me</h2>
-        <p className="section-subtitle">
-          QA Engineer with a software engineering foundation
-        </p>
       </div>
+
       <div className="about-content">
-        <div className="about-text">
-          <p>
-            I am a Quality Assurance Engineer with experience in manual testing, API testing,
-            and test automation within Agile environments. I design structured test cases,
-            validate business requirements, identify defects, and work closely with Product
-            Owners and developers to ensure software meets quality standards before release.
+        <motion.div className="about-intro" variants={itemVariants}>
+          <h3 className="about-headline">
+            QA Engineer with a Software Engineering Foundation
+          </h3>
+          <p className="about-lead">
+            With a software engineering background, I approach QA beyond surface-level UI
+            checks. I understand the logic behind features, APIs, and application flows, which
+            helps me design meaningful tests and communicate effectively with development and
+            product teams.
           </p>
-          <p>
-            What sets me apart is my software engineering background. As a Flutter developer,
-            I understand mobile architecture, REST APIs, JSON payloads, and engineering
-            workflows — which helps me test more effectively, communicate clearly with
-            development teams, and catch issues that go beyond surface-level UI checks.
-          </p>
-          <motion.div className="qa-highlights" variants={containerVariants}>
-            {qaHighlights.map((group) => (
-              <motion.div key={group.label} className="qa-highlight-group" variants={itemVariants}>
-                <span className="qa-highlight-label">{group.label}</span>
-                <div className="qa-highlight-tags">
-                  {group.items.map((item) => (
-                    <span key={item} className="qa-highlight-tag">
-                      {item}
-                    </span>
-                  ))}
+        </motion.div>
+
+        <motion.div className="quality" variants={itemVariants}>
+          <h3 className="quality-title">How I Think About Quality</h3>
+          <ol className="quality-steps">
+            {qualitySteps.map((step, index) => (
+              <li key={step.title} className="quality-step">
+                <div className="quality-step-head">
+                  <span className="quality-step-number">
+                    {String(index + 1).padStart(2, '0')}
+                  </span>
+                  <span className="quality-step-rule" aria-hidden="true" />
                 </div>
-              </motion.div>
+                <h4 className="quality-step-title">{step.title}</h4>
+                <p className="quality-step-description">{step.description}</p>
+              </li>
             ))}
-          </motion.div>
-          <motion.div className="about-roles" variants={containerVariants}>
-            {roles.map((role) => (
-              <motion.div
-                key={role.title}
-                className="role-card"
-                variants={itemVariants}
-                whileHover={{ scale: 1.05, y: -5 }}
-              >
-                <div className="role-icon">
-                  <role.Icon size={32} strokeWidth={1.5} />
-                </div>
-                <h3>{role.title}</h3>
-                <p>{role.description}</p>
-              </motion.div>
-            ))}
-          </motion.div>
-          <div className="about-stats">
-            <div className="stat-item">
-              <div className="stat-number">2+</div>
-              <div className="stat-label">QA & Agile Roles</div>
+          </ol>
+        </motion.div>
+
+        <motion.div className="about-stats" variants={itemVariants}>
+          {stats.map((stat) => (
+            <div key={stat.label} className="stat-item">
+              <div className="stat-number">{stat.value}</div>
+              <div className="stat-label">{stat.label}</div>
             </div>
-            <div className="stat-item">
-              <div className="stat-number">4+</div>
-              <div className="stat-label">Engineering Projects</div>
-            </div>
-            <div className="stat-item">
-              <div className="stat-number">1</div>
-              <div className="stat-label">Published App</div>
-            </div>
-          </div>
-        </div>
+          ))}
+        </motion.div>
       </div>
     </motion.section>
   )

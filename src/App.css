@@ -4,11 +4,6 @@
     position: relative;
 }
 
-/* Smooth scroll behavior */
-html {
-  scroll-behavior: smooth;
-}
-
 /* Section spacing */
 section {
   padding: 96px 24px;

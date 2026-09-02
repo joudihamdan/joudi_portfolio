@@ -1,23 +1,5 @@
 .about {
   background: transparent !important;
-  padding-bottom: 40px;
-}
-
-.section-header {
-  text-align: center;
-  margin-bottom: 4rem;
-}
-
-.section-title {
-  font-size: 2.5rem;
-  font-weight: 700;
-  margin-bottom: 1rem;
-  color: var(--text-dark);
-}
-
-.section-subtitle {
-  font-size: 1.2rem;
-  color: var(--text-light);
 }
 
 .about-content {
@@ -26,169 +8,204 @@
   padding: 0 2rem;
 }
 
-.about-text p {
-  font-size: 1.1rem;
-  color: var(--text-light);
-  margin-bottom: 1.5rem;
+/* ---- Intro: headline + single lead paragraph, centred at a readable width ---- */
+.about-intro {
+  text-align: center;
+}
+
+.about-headline {
+  max-width: 780px;
+  margin: 0 auto 1.25rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1.35;
+  letter-spacing: -0.01em;
+  color: var(--text-dark);
+}
+
+.about-lead {
+  max-width: 680px;
+  margin: 0 auto;
+  font-size: 1.05rem;
   line-height: 1.8;
+  color: var(--text-light);
 }
 
-.qa-highlights {
+/* ---- How I Think About Quality: three steps on one hairline ---- */
+.quality {
+  max-width: 1000px;
+  margin: 3.5rem auto 0;
+}
+
+.quality-title {
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+}
+
+.quality-steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 2.5rem 0 1rem;
-  padding: 1.75rem;
-  background: var(--surface);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 15px;
-  border: 1px solid var(--surface-2);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.5rem;
 }
 
-.qa-highlight-group {
+.quality-step-head {
   display: flex;
-  flex-direction: column;
+  align-items: center;
   gap: 0.75rem;
 }
 
-.qa-highlight-label {
+.quality-step-number {
+  flex-shrink: 0;
   font-size: 0.8rem;
   font-weight: 700;
   letter-spacing: 0.08em;
-  text-transform: uppercase;
   color: var(--accent-strong);
 }
 
-.qa-highlight-tags {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.5rem;
+.quality-step-rule {
+  position: relative;
+  flex: 1;
+  height: 1px;
+  background: var(--surface-border);
 }
 
-.qa-highlight-tag {
-  padding: 0.35rem 0.85rem;
-  background: var(--bg-beige);
-  color: var(--text-dark);
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border: 1px solid var(--border-color);
+/* Continues the same hairline across the grid gap so the three steps read as one line */
+.quality-step:not(:last-child) .quality-step-rule::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 2.5rem;
+  background: var(--surface-border);
 }
 
-.about-roles {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 1.5rem;
-  margin: 3rem 0;
+/* The last rule fades out so the row ends softly instead of stopping dead */
+.quality-step:last-child .quality-step-rule {
+  background: linear-gradient(to right, var(--surface-border), transparent);
 }
 
-.role-card {
-  text-align: center;
-  padding: 2rem;
-  background: var(--surface);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 15px;
-  border: 1px solid var(--surface-border);
-  transition: all 0.3s ease;
-  box-shadow: 0 8px 32px var(--shadow-soft);
-}
-
-.role-card:hover {
-  transform: translateY(-5px);
-  background: var(--surface-2);
-  box-shadow: 0 12px 40px var(--glow);
-  border-color: var(--glow-border);
-}
-
-.role-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--text-dark);
-  opacity: 0.85;
-  margin-bottom: 1rem;
-}
-
-.role-card h3 {
-  font-size: 1.2rem;
+.quality-step-title {
+  font-size: 1.05rem;
   font-weight: 600;
   color: var(--text-dark);
-  margin-bottom: 0.5rem;
+  margin: 0.85rem 0 0.4rem;
 }
 
-.role-card p {
+.quality-step-description {
   font-size: 0.95rem;
+  line-height: 1.65;
   color: var(--text-light);
   margin: 0;
 }
 
+/* ---- Stats: one closing strip, divided rather than three separate cards ---- */
 .about-stats {
+  max-width: 1000px;
+  margin: 3.5rem auto 0;
+  padding-top: 2rem;
+  border-top: 1px solid var(--surface-border);
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 2rem;
-  margin-top: 3rem;
 }
 
 .stat-item {
   text-align: center;
-  padding: 2rem;
-  background: var(--surface);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 12px;
-  border: 1px solid var(--surface-border);
-  box-shadow: 0 8px 32px var(--shadow-soft);
-  transition: all 0.3s ease;
+  padding: 0 1rem;
 }
 
-.stat-item:hover {
-  transform: translateY(-5px);
-  background: var(--surface-2);
-  box-shadow: 0 12px 40px var(--glow);
-  border-color: var(--glow-border);
+.stat-item + .stat-item {
+  border-left: 1px solid var(--surface-border);
 }
 
 .stat-number {
-  font-size: 2.5rem;
+  font-size: 2.25rem;
   font-weight: 700;
+  line-height: 1.2;
   background: linear-gradient(135deg, var(--accent-pink), var(--accent-beige));
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
 }
 
 .stat-label {
-  font-size: 1rem;
-  color: var(--text-light);
+  font-size: 0.95rem;
   font-weight: 500;
+  color: var(--text-light);
 }
 
-@media (max-width: 768px) {
-  .section-title {
-    font-size: 2rem;
-  }
-
-  .qa-highlights {
+/* Stack the steps before the columns get too narrow for comfortable line lengths */
+@media (max-width: 900px) {
+  .quality-steps {
     grid-template-columns: 1fr;
     gap: 1.75rem;
   }
 
-  .about-roles {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
+  /* Stacked: drop the horizontal connectors, keep each step's own hairline */
+  .quality-step:not(:last-child) .quality-step-rule::after {
+    display: none;
   }
 
-  .about-stats {
-    grid-template-columns: 1fr;
-    gap: 1.5rem;
-  }
-
-  .stat-number {
-    font-size: 2rem;
+  .quality-step:not(:last-child) .quality-step-rule {
+    background: linear-gradient(to right, var(--surface-border), transparent);
   }
 }
 
+@media (max-width: 768px) {
+  .about-content {
+    padding: 0 1rem;
+  }
+
+  .about-headline {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+  }
+
+  .about-lead {
+    font-size: 0.98rem;
+    line-height: 1.75;
+  }
+
+  .quality {
+    margin-top: 2.75rem;
+  }
+
+  .quality-title {
+    font-size: 1.1rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .quality-step-title {
+    margin: 0.65rem 0 0.3rem;
+  }
+
+  .quality-step-description {
+    font-size: 0.92rem;
+  }
+
+  .about-stats {
+    margin-top: 2.75rem;
+    padding-top: 1.5rem;
+  }
+
+  .stat-item {
+    padding: 0 0.4rem;
+  }
+
+  .stat-number {
+    font-size: 1.6rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .stat-label {
+    font-size: 0.78rem;
+    line-height: 1.35;
+  }
+}

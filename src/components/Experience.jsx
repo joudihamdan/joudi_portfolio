@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { ShieldCheck, KanbanSquare, Bot } from 'lucide-react'
+import { ShieldCheck, KanbanSquare, Bot, Smartphone } from 'lucide-react'
 import './Experience.css'
 
 function Experience() {
@@ -27,6 +27,22 @@ function Experience() {
       Icon: ShieldCheck,
     },
     {
+      period: 'July 2025 – Oct 2025',
+      title: 'Scrum Master & QA Tester',
+      company: 'TechSauce',
+      location: 'Damascus, Syria',
+      description:
+        'Dual role leading Agile delivery and quality assurance across two concurrent software projects.',
+      highlights: [
+        'Led Agile ceremonies for two concurrent projects, ensuring task alignment and removing blockers.',
+        'Validated implemented features against acceptance criteria and business requirements before release.',
+        'Performed comprehensive manual testing to ensure applications matched technical specifications.',
+        'Monitored project progress and task distribution to ensure timely, high-quality delivery.',
+      ],
+      technologies: ['Jira', 'Scrum', 'Manual Testing', 'Agile', 'Acceptance Criteria'],
+      Icon: KanbanSquare,
+    },
+    {
       period: 'Jun 2025 – Present',
       title: 'Robotics & Programming Coach',
       company: 'Genius Planet Academy',
@@ -45,20 +61,15 @@ function Experience() {
       Icon: Bot,
     },
     {
-      period: 'July 2025 – Oct 2025',
-      title: 'Scrum Master & QA Tester',
-      company: 'TechSauce',
-      location: 'Damascus, Syria',
+      period: '2024 – 2025',
+      title: 'Assistant Flutter Coach',
+      company: 'Sanad Development Team',
+      location: '',
       description:
-        'Dual role leading Agile delivery and quality assurance across two concurrent software projects.',
-      highlights: [
-        'Led Agile ceremonies for two concurrent projects, ensuring task alignment and removing blockers.',
-        'Validated implemented features against acceptance criteria and business requirements before release.',
-        'Performed comprehensive manual testing to ensure applications matched technical specifications.',
-        'Monitored project progress and task distribution to ensure timely, high-quality delivery.',
-      ],
-      technologies: ['Jira', 'Scrum', 'Manual Testing', 'Agile', 'Acceptance Criteria'],
-      Icon: KanbanSquare,
+        'Supported and mentored junior developers in learning Flutter, simplifying technical concepts and guiding hands-on mobile development practice.',
+      highlights: [],
+      technologies: ['Flutter', 'Mobile Development', 'Mentoring'],
+      Icon: Smartphone,
     },
   ]
 
@@ -74,14 +85,14 @@ function Experience() {
       <div className="section-header">
         <h2 className="section-title">Experience</h2>
         <p className="section-subtitle">
-          Professional experience across QA, Agile delivery, and STEM coaching
+          Professional experience across QA, Agile delivery, coaching, and mentorship
         </p>
       </div>
       <div className="experience-container">
         <div className="experience-line"></div>
         {experiences.map((role, index) => (
           <motion.div
-            key={index}
+            key={role.title}
             className={`experience-item ${activeIndex === index ? 'active' : ''}`}
             onClick={() => setActiveIndex(activeIndex === index ? null : index)}
             initial={{ opacity: 0, x: -50 }}
@@ -102,14 +113,16 @@ function Experience() {
                 {role.company}{role.location ? ` · ${role.location}` : ''}
               </p>
               <p className="experience-description">{role.description}</p>
-              <ul className="experience-highlights">
-                {role.highlights.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+              {role.highlights.length > 0 && (
+                <ul className="experience-highlights">
+                  {role.highlights.map((item, i) => (
+                    <li key={i}>{item}</li>
+                  ))}
+                </ul>
+              )}
               <div className="experience-technologies">
-                {role.technologies.map((tech, techIndex) => (
-                  <span key={techIndex} className="tech-badge">
+                {role.technologies.map((tech) => (
+                  <span key={tech} className="tech-badge">
                     {tech}
                   </span>
                 ))}
