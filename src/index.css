@@ -1,10 +1,11 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800;900&display=swap');
 
 :root {
   /* Soft & Elegant Palette (Light) */
@@ -26,7 +27,7 @@
 
   --text-color: #4A3A35;
   --text-dark: #2D2321;
-  --text-light: #6E5B57;
+  --text-light: #5F4D49;
 
   --bg-color: var(--palette-lightest);
   --bg-light: #FFFFFF;
@@ -41,9 +42,23 @@
   --surface-2: rgba(255, 255, 255, 0.78);
   --surface-solid: rgba(255, 255, 255, 0.95);
   --surface-border: rgba(180, 130, 138, 0.22);
-  --shadow-soft: rgba(90, 60, 66, 0.10);
+  --shadow-soft: rgba(90, 60, 66, 0.06);
   --glow: rgba(168, 80, 98, 0.16);
   --glow-border: rgba(168, 80, 98, 0.30);
+
+  /* Shape + type system: radii vary by role instead of one size everywhere */
+  --radius-xs: 4px;   /* tags, labels */
+  --radius-sm: 8px;   /* utility buttons */
+  --radius-md: 14px;  /* panels */
+  --radius-lg: 22px;  /* media stages */
+  --rule: rgba(120, 80, 88, 0.16);         /* hairlines */
+  --tint: rgba(168, 80, 98, 0.045);        /* quiet rose wash for panels */
+  --tint-strong: rgba(168, 80, 98, 0.08);
+  --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  /* One chip style for skills and technology tags across the site */
+  --chip-bg: rgba(168, 80, 98, 0.06);
+  --chip-border: rgba(168, 80, 98, 0.18);
 }
 
 :root[data-theme="dark"] {
@@ -60,7 +75,7 @@
 
   --text-color: #ECE6E9;
   --text-dark: #F7F2F4;
-  --text-light: #A99AA1;
+  --text-light: #B6A8AE;
 
   --bg-color: #16141A;         /* deep charcoal, subtle warmth (not pure black) */
   --bg-light: #1E1B22;
@@ -77,6 +92,12 @@
   --shadow-soft: rgba(0, 0, 0, 0.38);
   --glow: rgba(201, 139, 150, 0.16);
   --glow-border: rgba(201, 139, 150, 0.34);
+
+  --rule: rgba(255, 255, 255, 0.10);
+  --tint: rgba(230, 178, 188, 0.05);
+  --tint-strong: rgba(230, 178, 188, 0.09);
+  --chip-bg: rgba(230, 178, 188, 0.08);
+  --chip-border: rgba(230, 178, 188, 0.22);
 }
 
 body {

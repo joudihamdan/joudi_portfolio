@@ -1,210 +1,607 @@
-.projects {
-  background: transparent !important;
-  padding: 96px 24px;
-}
-
-.bento-grid {
-  display: grid;
-  grid-template-columns: repeat(12, 1fr);
-  grid-template-rows: repeat(4, auto);
-  gap: 1.5rem;
-  max-width: 1400px;
+/* ---------- Equal project cards ---------- */
+.project-cards {
+  max-width: 1136px;
   margin: 0 auto;
-  padding: 0 2rem;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
 }
 
-.bento-item {
-  background: var(--surface);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 20px;
-  padding: 2rem;
-  border: 1px solid var(--surface-border);
-  transition: all 0.3s ease;
+.project-card {
   position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 32px var(--shadow-soft);
+  display: flex;
+  flex-direction: column;
+  padding: 1.75rem;
+  border-radius: var(--radius-md);
+  background: var(--surface);
+  border: 1px solid var(--rule);
+  transition: border-color 0.25s ease, background 0.25s ease, transform 0.25s ease;
 }
 
-.bento-item::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  height: 4px;
-  background: linear-gradient(90deg, var(--accent-pink), var(--accent-beige));
-  transform: scaleX(0);
-  transition: transform 0.3s ease;
-}
-
-.bento-item:hover::before {
-  transform: scaleX(1);
-}
-
-.bento-item:hover {
-  transform: translateY(-5px);
+.project-card:hover {
+  border-color: var(--glow-border);
   background: var(--surface-2);
-  box-shadow: 0 12px 40px var(--glow);
+  transform: translateY(-3px);
+}
+
+.project-card:focus-within {
   border-color: var(--glow-border);
 }
 
-.bento-item.wide {
-  grid-column: span 12;
+.project-card-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 1.25rem;
 }
 
-.bento-item.third {
-  grid-column: span 4;
-}
-
-.bento-item.featured {
-  background: var(--surface-2);
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-}
-
-.bento-item.is-dev {
-  border-color: var(--glow-border);
-}
-
-.bento-item.wide .bento-title {
-  font-size: 2.1rem;
-}
-
-.bento-item.wide .bento-description {
-  max-width: 840px;
-}
-
-.bento-badge {
-  position: absolute;
-  top: 1.25rem;
-  right: 1.25rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: 50px;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
+.project-number {
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
   color: var(--accent-strong);
-  background: rgba(var(--accent-strong-rgb), 0.12);
-  border: 1px solid rgba(var(--accent-strong-rgb), 0.30);
 }
 
-.bento-icon {
-  margin-bottom: 1rem;
+/* Logo, or a drawn icon in the same box when there's no logo file */
+/* Every logo sits in the same 56x56 square, scaled to fit (never cropped) */
+.project-logo {
+  flex-shrink: 0;
+  width: 56px;
+  height: 56px;
+  border-radius: 14px;
+  object-fit: contain;
+  background: #fff;
+  border: 1px solid var(--rule);
+}
+
+.project-logo.is-icon {
+  display: grid;
+  place-items: center;
+  color: var(--accent-strong);
+  background: var(--tint-strong);
+  border-color: transparent;
+}
+
+.project-logo.is-icon svg {
+  width: 46%;
+  height: 46%;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  color: var(--text-dark);
+}
+
+.project-subtitle {
+  margin-top: 0.3rem;
+  font-size: 0.98rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+}
+
+.project-type {
+  margin-top: 0.5rem;
+  font-size: 0.88rem;
+  font-style: italic;
+  color: var(--text-light);
+}
+
+/* Recognition line (CLICK CASH): a quiet highlighted note */
+.project-note {
+  margin-top: 0.75rem;
+  padding: 0.55rem 0.75rem;
+  border-radius: var(--radius-sm);
+  background: var(--tint-strong);
+  font-size: 0.85rem;
+  line-height: 1.55;
+  color: var(--text-dark);
+}
+
+/* Clamped so every card keeps the same height; the popup has the full text */
+.project-description {
+  margin-top: 1rem;
+  font-size: 0.95rem;
+  line-height: 1.7;
+  color: var(--text-light);
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  min-height: calc(1.7em * 3);
+}
+
+.project-card-foot {
+  margin-top: auto;
+  padding-top: 1.5rem;
   display: flex;
   align-items: center;
-  color: var(--text-dark);
-  opacity: 0.85;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
 }
 
-.bento-icon svg {
-  width: 40px;
-  height: 40px;
-}
-
-.bento-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 0.5rem;
-  line-height: 1.2;
-}
-
-.bento-subtitle {
-  font-size: 1rem;
-  color: var(--accent-strong);
-  font-weight: 600;
-  margin-bottom: 1rem;
-}
-
-.bento-description {
-  font-size: 1rem;
-  color: var(--text-light);
-  line-height: 1.7;
-  margin-bottom: 1.5rem;
-}
-
-.bento-technologies {
+.project-tags {
+  list-style: none;
   display: flex;
   flex-wrap: wrap;
-  gap: 0.5rem;
+  gap: 0.4rem;
 }
 
-.bento-tech {
-  padding: 0.4rem 1rem;
-  background: var(--bg-beige);
+.project-tags .chip.is-more {
+  color: var(--accent-strong);
+  background: transparent;
+  border-style: dashed;
+}
+
+.project-tags.is-large .chip {
+  font-size: 0.9rem;
+  padding: 0.42rem 0.9rem;
+}
+
+.project-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
+  padding: 0.5rem 0.8rem;
+  border-radius: var(--radius-sm);
+  background: transparent;
+  border: 1px solid var(--rule);
   color: var(--text-dark);
-  border-radius: 20px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border: 1px solid var(--border-color);
+  font-size: 0.88rem;
+  font-weight: 600;
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
-.bento-qa {
-  font-size: 0.95rem;
+/* Stretch the button's hit area over the whole card */
+.project-open::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.project-card:hover .project-open {
+  background: var(--text-dark);
+  border-color: var(--text-dark);
+  color: var(--bg-color);
+}
+
+.project-open:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+/* ---------- Popup ---------- */
+.project-modal {
+  max-width: 820px;
+}
+
+.project-modal-cover {
+  position: relative;
+}
+
+.project-year {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  z-index: 3;
+  padding: 0.35rem 0.75rem;
+  border-radius: 50px;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-dark);
+  background: var(--surface-solid);
+  border: 1px solid var(--rule);
+}
+
+.project-modal-body {
+  padding: 2rem 2.5rem 2.5rem;
+}
+
+.project-modal-head {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.project-modal-title {
+  font-size: 2rem;
+  font-weight: 800;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  color: var(--text-dark);
+}
+
+.project-modal-head + .project-type {
+  margin-top: 1rem;
+}
+
+.project-modal-description {
+  margin-top: 1.25rem;
+  font-size: 1.02rem;
+  line-height: 1.8;
   color: var(--text-light);
-  line-height: 1.6;
-  margin-bottom: 1.25rem;
-  padding: 0.75rem 1rem;
-  background: var(--surface);
-  border-radius: 10px;
-  border-left: 3px solid var(--accent-strong);
 }
 
-.bento-qa-label {
+.project-modal-block {
+  margin-top: 1.75rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--rule);
+}
+
+.project-modal-label {
+  margin-bottom: 0.75rem;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+}
+
+.project-role {
+  font-size: 1rem;
+  line-height: 1.7;
+  color: var(--text-dark);
+}
+
+/* ---------- Popup media: always shown in full ---------- */
+.project-media {
+  position: relative;
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+  background:
+    radial-gradient(rgba(var(--accent-strong-rgb), 0.13) 1px, transparent 1.3px) center / 20px 20px,
+    linear-gradient(135deg, #FBEEF0 0%, #F6EDF4 55%, #EFE8F5 100%);
+}
+
+:root[data-theme="dark"] .project-media {
+  background:
+    radial-gradient(rgba(var(--accent-strong-rgb), 0.12) 1px, transparent 1.3px) center / 20px 20px,
+    linear-gradient(135deg, #2A2229 0%, #241F2A 100%);
+}
+
+/* Gallery (CLICK CASH): one complete screen at a time */
+.project-media.is-gallery {
+  padding: 3.25rem 1.5rem 1.5rem;
+  text-align: center;
+}
+
+.gallery-stage {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.25rem;
+}
+
+/* Height-driven so the whole screen always fits; never wider than natural */
+.gallery-phone.phone-frame {
+  width: auto;
+  border-radius: 28px;
+}
+
+.gallery-phone.phone-frame img {
+  width: auto;
+  height: min(52vh, 480px); /* capped at natural height inline */
+  max-width: min(var(--natural-w), 62vw);
+  object-fit: contain;
+}
+
+.gallery-btn {
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  background: var(--surface-solid);
+  border: 1px solid var(--rule);
+  color: var(--text-dark);
+  transition: background 0.2s ease, border-color 0.2s ease;
+}
+
+.gallery-btn:hover {
+  border-color: var(--glow-border);
+  background: var(--bg-beige);
+}
+
+.gallery-btn:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 3px;
+}
+
+.gallery-caption {
+  margin-top: 1.1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   color: var(--text-dark);
 }
 
-.projects-secondary {
-  max-width: 1400px;
-  margin: 3rem auto 0;
-  padding: 0 2rem;
+.gallery-count {
+  margin-top: 0.2rem;
+  font-size: 0.8rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--text-light);
 }
 
-.projects-secondary-title {
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--text-dark);
-  margin-bottom: 1.5rem;
+/* Row (DAHAB CLINIC): a few complete screens side by side */
+.project-media.is-row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1.25rem;
+  padding: 3.25rem 1.5rem 2rem;
 }
 
-.projects-secondary-grid {
+.project-media.is-row .phone-frame {
+  --phone-w: 200px;
+  border-radius: 26px;
+}
+
+/* Drawn cover (no screenshots yet): list panel · phone · map panel */
+.project-media.is-drawn {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-  gap: 1.5rem;
+  grid-template-columns: 1fr 1.05fr 1fr;
+  gap: 1rem;
+  align-items: center;
+  padding: 3rem 2rem 2rem;
+  --line: rgba(var(--accent-strong-rgb), 0.55);
+  --soft: rgba(var(--accent-strong-rgb), 0.16);
 }
 
-.projects-secondary-card {
-  grid-column: span 1 !important;
-  grid-row: span 1 !important;
+.drawn-panel {
+  position: relative;
+  border: 1.5px solid var(--line);
+  border-radius: 18px;
+  background: rgba(255, 255, 255, 0.55);
+  padding: 1rem;
+  color: var(--accent-strong);
 }
 
-@media (max-width: 1000px) {
-  .bento-item.third {
-    grid-column: span 6;
-  }
+:root[data-theme="dark"] .drawn-panel {
+  background: rgba(255, 255, 255, 0.04);
 }
 
-@media (max-width: 768px) {
-  .bento-grid {
+.drawn-label {
+  display: block;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--accent-strong);
+}
+
+.drawn-list {
+  margin-top: 0;
+}
+
+.drawn-row {
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  padding: 0.55rem 0;
+  border-top: 1px solid var(--soft);
+}
+
+.drawn-row-icon {
+  display: grid;
+  place-items: center;
+  width: 38px;
+  height: 38px;
+  flex-shrink: 0;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+}
+
+.drawn-row-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+.drawn-bars {
+  display: grid;
+  gap: 6px;
+  flex: 1;
+}
+
+.drawn-bars i {
+  display: block;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--soft);
+}
+
+.drawn-bars i + i {
+  width: 60%;
+}
+
+.drawn-bars.is-centered {
+  justify-items: center;
+  margin: 1rem 0;
+}
+
+.drawn-bars.is-centered i {
+  width: 70%;
+}
+
+.drawn-bars.is-centered i + i {
+  width: 45%;
+}
+
+/* A complete phone outline, nothing cut off */
+.drawn-phone {
+  min-height: 300px;
+  border-radius: 30px;
+  padding-bottom: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 2.5rem;
+}
+
+.drawn-notch {
+  position: absolute;
+  top: 12px;
+  left: 50%;
+  width: 46px;
+  height: 6px;
+  border-radius: 3px;
+  background: var(--soft);
+  transform: translateX(-50%);
+}
+
+.drawn-hero-icon {
+  display: grid;
+  place-items: center;
+  width: 108px;
+  height: 108px;
+  margin-top: 1.25rem;
+  border-radius: 50%;
+  background: var(--soft);
+}
+
+.drawn-hero-icon svg {
+  width: 56px;
+  height: 56px;
+}
+
+.drawn-cta {
+  width: 70%;
+  height: 30px;
+  border-radius: 10px;
+  border: 1.5px solid var(--line);
+}
+
+.drawn-map {
+  margin-top: 0;
+  min-height: 170px;
+}
+
+.drawn-route {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 0.75rem;
+}
+
+.drawn-route path {
+  fill: none;
+  stroke: var(--line);
+  stroke-width: 2;
+  stroke-dasharray: 5 6;
+  stroke-linecap: round;
+}
+
+.drawn-pin {
+  position: absolute;
+  display: grid;
+  place-items: center;
+}
+
+.drawn-pin svg {
+  width: 24px;
+  height: 24px;
+}
+
+.drawn-pin.is-start {
+  left: 8%;
+  top: 62%;
+}
+
+.drawn-pin.is-end {
+  right: 8%;
+  top: 30%;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 860px) {
+  .project-cards {
     grid-template-columns: 1fr;
   }
+}
 
-  .bento-item.wide,
-  .bento-item.third {
-    grid-column: span 1;
-    grid-row: span 1;
+@media (max-width: 640px) {
+  .project-card {
+    padding: 1.5rem 1.25rem;
   }
 
-  .bento-title,
-  .bento-item.wide .bento-title {
-    font-size: 1.5rem;
+  .project-modal-body {
+    padding: 1.5rem 1.25rem 1.75rem;
   }
 
-  .bento-icon svg {
-    width: 32px;
-    height: 32px;
+  .project-modal-title {
+    font-size: 1.6rem;
+  }
+
+  .project-media {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+  }
+
+  .project-media.is-gallery {
+    padding: 3.25rem 0.75rem 1.25rem;
+  }
+
+  .gallery-stage {
+    gap: 0.5rem;
+  }
+
+  .gallery-phone.phone-frame img {
+    height: min(48vh, 420px);
+  }
+
+  .gallery-btn {
+    width: 38px;
+    height: 38px;
+  }
+
+  /* Three full screens in a row would be tiny: scroll them sideways instead */
+  .project-media.is-row {
+    justify-content: flex-start;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding: 3.25rem 1.25rem 1.5rem;
+    gap: 1rem;
+  }
+
+  .project-media.is-row .phone-frame {
+    --phone-w: 190px;
+    scroll-snap-align: center;
+  }
+
+  .project-media.is-drawn {
+    grid-template-columns: 1fr 1.1fr;
+    padding: 3rem 1.25rem 1.5rem;
+  }
+
+  /* Keep the list and the phone; the map panel needs more room */
+  .drawn-map {
+    display: none;
+  }
+
+  .drawn-list {
+    margin-top: 0.75rem;
+  }
+
+  .drawn-phone {
+    min-height: 240px;
+  }
+
+  .drawn-hero-icon {
+    width: 84px;
+    height: 84px;
+  }
+
+  .drawn-hero-icon svg {
+    width: 44px;
+    height: 44px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-card,
+  .project-open {
+    transition: none;
   }
 }

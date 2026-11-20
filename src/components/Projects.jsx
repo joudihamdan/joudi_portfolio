@@ -1,161 +1,364 @@
-import React from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { motion } from 'framer-motion'
-import { Wallet, UtensilsCrossed, CalendarCheck, Bike, Code2 } from 'lucide-react'
+import { reveal } from '../motion'
+import {
+  ArrowUpRight,
+  ChevronLeft,
+  ChevronRight,
+  Bike,
+  CalendarCheck,
+  Clock,
+  Coffee,
+  MapPin,
+  Pizza,
+  Store,
+  UtensilsCrossed,
+} from 'lucide-react'
+import projectMedia from 'virtual:project-media'
+import PhoneFrame from './PhoneFrame'
+import Modal from './Modal'
 import './Projects.css'
 
-function Projects() {
-  const primaryProjects = [
-    {
-      title: 'CLICK CASH',
-      subtitle: 'Digital Money Transfer App',
-      badge: 'Flagship · Development',
-      description:
-        'A full-featured fintech mobile app built in Flutter — secure onboarding with OTP, password, and fingerprint authentication; bank-account management; a money-transfer system via QR code or phone number with real-time notifications; transaction history and scheduling; and dedicated business accounts for sales, invoices, and payment requests.',
-      devHighlight:
-        'End-to-end development — authentication and security, transaction logic, business accounts, and real-time notifications.',
-      technologies: ['Flutter', 'Firebase', 'Bloc', 'Authentication', 'QR / Payments'],
-      Icon: Wallet,
-      size: 'wide',
-      type: 'dev',
+// Logos and screenshots come from public/projects/<slug>/ (see vite.config.js).
+// Projects with screenshots get a cover of three phones; the others get a
+// drawn cover that describes what the app does. Adding a screenshot folder
+// later switches a project to the phone cover automatically.
+const projects = [
+  {
+    slug: 'click-cash',
+    title: 'CLICK CASH',
+    subtitle: 'Digital Money Transfer App',
+    type: 'Graduation Project · Damascus University · 2025',
+    year: '2025',
+    note:
+      'Selected by Damascus University as one of three projects from the Faculty of Information Technology Engineering showcased at TexpoLand (Nov 2025).',
+    description:
+      'A fintech mobile app with secure authentication (OTP, password, fingerprint), bank account management, and money transfers by QR code or phone number. Also supports scheduled transactions, real-time notifications, and business accounts for sales, invoices, and payment requests.',
+    role: 'Mobile developer on the project team, responsible for building the Flutter app.',
+    technologies: ['Flutter', 'Firebase', 'BLoC', 'Authentication', 'Payments'],
+    // Popup shows every screen, one at a time, in file order
+    gallery: true,
+    captions: {
+      '01-login': 'Secure sign-in with password or fingerprint',
+      '02-home': 'Dashboard with balance and quick actions',
+      '03-send-money': 'Send money from a linked bank account',
+      '04-transfer-success': 'Transfer confirmation with transaction details',
+      '05-receive-qr': 'Receive money by sharing a QR code',
+      '06-statistics': 'Monthly income and transaction statistics',
     },
-    {
-      title: 'MERSOOL',
-      subtitle: 'Food Delivery App — Published on Google Play',
-      description:
-        'Cross-platform food delivery app built with Flutter and Bloc, featuring restaurant browsing, meal ordering, and real-time order tracking with Map API integration.',
-      qaContribution:
-        'Validated ordering, tracking, and location services; identified edge cases to improve stability and user experience.',
-      technologies: ['Flutter', 'Bloc', 'Clean Architecture', 'Maps API'],
-      Icon: UtensilsCrossed,
-      size: 'third',
-      type: 'qa',
+  },
+  {
+    slug: 'dahab-clinic',
+    title: 'DAHAB CLINIC',
+    subtitle: 'Beauty Clinic Booking App',
+    type: 'Flutter Development',
+    description:
+      'A booking app for a beauty clinic: browse services by category, book appointments based on doctor availability, and manage sessions (pending, in progress, completed). Includes offers, reviews, guest mode, multi-language support, and light/dark themes.',
+    technologies: ['Flutter', 'GetX', 'Firebase'],
+    coverScreens: ['03-booking', '01-home', '05-sessions'],
+    captions: {
+      '01-home': 'Home with categories, top services, and offers',
+      '03-booking': 'Booking with available time slots',
+      '05-sessions': 'Managing pending, in-progress, and completed sessions',
     },
-    {
-      title: 'DAHAB CLINIC',
-      subtitle: 'Clinic Management App',
-      description:
-        'Clinic management app built with Flutter and GetX for appointment scheduling, patient profiles, customizable themes, and push notifications.',
-      qaContribution:
-        'Tested appointment scheduling, patient management, multi-language support, and UI theme validation.',
-      technologies: ['Flutter', 'GetX', 'Firebase', 'MVC'],
-      Icon: CalendarCheck,
-      size: 'third',
-      type: 'qa',
+  },
+  {
+    slug: 'mersool',
+    title: 'MERSOOL',
+    subtitle: 'Food Delivery App',
+    type: 'Flutter Development',
+    description:
+      'A cross-platform food delivery app with restaurant browsing, meal ordering, and real-time order tracking with map integration.',
+    technologies: ['Flutter', 'BLoC', 'Clean Architecture', 'Maps API'],
+    Icon: UtensilsCrossed,
+    drawn: {
+      left: { label: 'Restaurants', rows: [Store, Pizza, Coffee] },
+      right: { label: 'Order tracking' },
     },
-    {
-      title: 'RIDESHARE APP',
-      subtitle: 'Bicycle Rental System',
-      description:
-        'Mobile app for renting bicycles from city hubs, built with Bloc and Clean Architecture with real-time geolocation and booking management.',
-      qaContribution:
-        'Tested booking flows, ride tracking, and real-time location feature validation.',
-      technologies: ['Flutter', 'Bloc', 'Clean Architecture', 'Maps'],
-      Icon: Bike,
-      size: 'third',
-      type: 'qa',
+  },
+  {
+    slug: 'rideshare',
+    title: 'RIDESHARE',
+    subtitle: 'Bicycle Rental App',
+    type: 'Flutter Development',
+    description:
+      'A bike rental app for booking bicycles from city hubs, with real-time geolocation and booking management.',
+    technologies: ['Flutter', 'BLoC', 'Clean Architecture', 'Maps'],
+    Icon: Bike,
+    drawn: {
+      left: { label: 'Bookings', rows: [CalendarCheck, Bike, Clock] },
+      right: { label: 'City hubs' },
     },
-  ]
+  },
+]
 
-  const secondaryProjects = [
-    {
-      title: 'Compiler for React',
-      subtitle: 'Custom JSX Parser',
-      description:
-        'Designed and built a React-based compiler using Antlr to parse and understand custom JSX syntax — demonstrating strong software engineering fundamentals.',
-      technologies: ['React', 'Antlr', 'Compiler Design'],
-      Icon: Code2,
-    },
-  ]
+const mediaFor = (slug) => projectMedia[slug] || { logo: null, screens: [] }
+
+function ProjectLogo({ project }) {
+  const { logo } = mediaFor(project.slug)
+  if (logo) {
+    return (
+      <img
+        className="project-logo"
+        src={logo.src}
+        alt={`${project.title} logo`}
+        width={logo.width}
+        height={logo.height}
+        loading="lazy"
+        decoding="async"
+      />
+    )
+  }
+  const Icon = project.Icon || UtensilsCrossed
+  return (
+    <span className="project-logo is-icon" aria-hidden="true">
+      <Icon strokeWidth={1.6} />
+    </span>
+  )
+}
+
+/* ---------- Covers ---------- */
+
+const captionOf = (project, screen, i) =>
+  project.captions?.[screen.name] || `${project.title} screen ${i + 1}`
+
+// Every screen in full, one at a time: buttons, arrow keys, and swipe.
+function ScreenGallery({ project, screens }) {
+  const [index, setIndex] = useState(0)
+  const touch = useRef(null)
+  const count = screens.length
+  const go = (step) => setIndex((i) => (i + step + count) % count)
+
+  useEffect(() => {
+    const onKey = (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(1) }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(-1) }
+    }
+    document.addEventListener('keydown', onKey)
+    return () => document.removeEventListener('keydown', onKey)
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [count])
+
+  // Warm the next screen so stepping through feels instant
+  useEffect(() => {
+    const next = screens[(index + 1) % count]
+    if (next) new Image().src = next.src
+  }, [index, count, screens])
+
+  const screen = screens[index]
+  const caption = captionOf(project, screen, index)
 
   return (
-    <motion.section
-      id="projects"
-      className="projects"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.01 }}
-      transition={{ duration: 0.6 }}
+    <div
+      className="project-media is-gallery"
+      onTouchStart={(e) => { touch.current = { x: e.touches[0].clientX, y: e.touches[0].clientY } }}
+      onTouchEnd={(e) => {
+        if (!touch.current) return
+        const dx = e.changedTouches[0].clientX - touch.current.x
+        const dy = e.changedTouches[0].clientY - touch.current.y
+        touch.current = null
+        if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) go(dx < 0 ? 1 : -1)
+      }}
     >
-      <div className="section-header">
-        <h2 className="section-title">Engineering Projects</h2>
-        <p className="section-subtitle">
-          Flagship builds and mobile apps from my software-engineering work — with QA contributions where I led testing
-        </p>
+      <div className="gallery-stage">
+        <button type="button" className="gallery-btn" onClick={() => go(-1)} aria-label="Previous screen">
+          <ChevronLeft size={22} strokeWidth={2} />
+        </button>
+        <PhoneFrame
+          key={screen.src}
+          screen={screen}
+          alt={caption}
+          lazy={false}
+          className="gallery-phone"
+          imgStyle={{ maxHeight: `${screen.height}px` }}
+        />
+        <button type="button" className="gallery-btn" onClick={() => go(1)} aria-label="Next screen">
+          <ChevronRight size={22} strokeWidth={2} />
+        </button>
       </div>
-      <div className="bento-grid">
-        {primaryProjects.map((project, index) => (
-          <motion.div
-            key={project.title}
-            className={`bento-item ${project.size} featured ${project.type === 'dev' ? 'is-dev' : ''}`}
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, margin: "-50px" }}
-            transition={{ duration: 0.6, delay: index * 0.08 }}
-            whileHover={{ scale: 1.02, y: -5 }}
-          >
-            {project.badge && <span className="bento-badge">{project.badge}</span>}
-            {project.Icon && (
-              <div className="bento-icon">
-                <project.Icon size={40} strokeWidth={1.5} />
-              </div>
-            )}
-            <h3 className="bento-title">{project.title}</h3>
-            <p className="bento-subtitle">{project.subtitle}</p>
-            <p className="bento-description">{project.description}</p>
-            {project.qaContribution && (
-              <p className="bento-qa">
-                <span className="bento-qa-label">QA contribution:</span> {project.qaContribution}
-              </p>
-            )}
-            {project.devHighlight && (
-              <p className="bento-qa bento-dev">
-                <span className="bento-qa-label">Development:</span> {project.devHighlight}
-              </p>
-            )}
-            <div className="bento-technologies">
-              {project.technologies.map((tech, techIndex) => (
-                <span key={techIndex} className="bento-tech">
-                  {tech}
-                </span>
-              ))}
-            </div>
-          </motion.div>
+      <p className="gallery-caption">{caption}</p>
+      <p className="gallery-count" aria-live="polite">
+        {index + 1} / {count}
+      </p>
+    </div>
+  )
+}
+
+// A few screens side by side, each shown in full.
+function ScreenRow({ project, screens }) {
+  const picks = (project.coverScreens || [])
+    .map((name) => screens.find((s) => s.name === name))
+    .filter(Boolean)
+  const shown = picks.length ? picks : screens.slice(0, 3)
+  return (
+    <div className="project-media is-row">
+      {shown.map((screen, i) => (
+        <PhoneFrame key={screen.src} screen={screen} alt={captionOf(project, screen, i)} />
+      ))}
+    </div>
+  )
+}
+
+// Tidy line drawing: a list panel, a phone, and a map panel.
+function DrawnCover({ project }) {
+  const { left, right } = project.drawn
+  const Icon = project.Icon
+  return (
+    <div className="project-media is-drawn" aria-hidden="true">
+      <div className="drawn-panel drawn-list">
+        <span className="drawn-label">{left.label}</span>
+        {left.rows.map((RowIcon, i) => (
+          <div key={i} className="drawn-row">
+            <span className="drawn-row-icon">
+              <RowIcon strokeWidth={1.5} />
+            </span>
+            <span className="drawn-bars">
+              <i />
+              <i />
+            </span>
+          </div>
         ))}
       </div>
 
-      <div className="projects-secondary">
-        <h3 className="projects-secondary-title">Additional Development Work</h3>
-        <div className="projects-secondary-grid">
-          {secondaryProjects.map((project, index) => (
-            <motion.div
-              key={project.title}
-              className="bento-item projects-secondary-card"
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-             viewport={{ once: true, margin: "-50px" }}
-              transition={{ duration: 0.5, delay: index * 0.1 }}
-              whileHover={{ scale: 1.02, y: -5 }}
-            >
-              {project.Icon && (
-                <div className="bento-icon">
-                  <project.Icon size={32} strokeWidth={1.5} />
-                </div>
-              )}
-              <h3 className="bento-title">{project.title}</h3>
-              <p className="bento-subtitle">{project.subtitle}</p>
-              <p className="bento-description">{project.description}</p>
-              <div className="bento-technologies">
-                {project.technologies.map((tech, techIndex) => (
-                  <span key={techIndex} className="bento-tech">
-                    {tech}
-                  </span>
-                ))}
-              </div>
-            </motion.div>
-          ))}
-        </div>
+      <div className="drawn-panel drawn-phone">
+        <span className="drawn-notch" />
+        <span className="drawn-hero-icon">
+          <Icon strokeWidth={1.25} />
+        </span>
+        <span className="drawn-bars is-centered">
+          <i />
+          <i />
+        </span>
+        <span className="drawn-cta" />
       </div>
-    </motion.section>
+
+      <div className="drawn-panel drawn-map">
+        <span className="drawn-label">{right.label}</span>
+        <svg viewBox="0 0 200 120" className="drawn-route">
+          <path d="M28 92 C 60 92, 64 40, 104 52 S 150 86, 172 30" />
+        </svg>
+        <span className="drawn-pin is-start">
+          <MapPin strokeWidth={1.5} />
+        </span>
+        <span className="drawn-pin is-end">
+          <MapPin strokeWidth={1.5} />
+        </span>
+        <span className="drawn-bars">
+          <i />
+        </span>
+      </div>
+    </div>
+  )
+}
+
+function ProjectMedia({ project }) {
+  const { screens } = mediaFor(project.slug)
+  if (screens.length && project.gallery) return <ScreenGallery project={project} screens={screens} />
+  if (screens.length) return <ScreenRow project={project} screens={screens} />
+  if (project.drawn) return <DrawnCover project={project} />
+  return null
+}
+
+/* ---------- Section ---------- */
+
+function Projects() {
+  const [open, setOpen] = useState(null) // { project, opener }
+
+  return (
+    <section id="projects" className="projects">
+      <div className="section-header">
+        <h2 className="section-title">Selected Mobile Development Projects</h2>
+        <p className="section-subtitle">
+          Mobile applications I developed with Flutter, building the technical foundation that now
+          shapes my approach to quality assurance.
+        </p>
+      </div>
+
+      <div className="project-cards">
+        {projects.map((project, i) => (
+          <motion.article
+            key={project.slug}
+            className="project-card"
+            {...reveal()}
+          >
+            <div className="project-card-top">
+              <ProjectLogo project={project} />
+              <span className="project-number">{String(i + 1).padStart(2, '0')}</span>
+            </div>
+
+            <h3 className="project-title">{project.title}</h3>
+            <p className="project-subtitle">{project.subtitle}</p>
+            <p className="project-type">{project.type}</p>
+            {project.note && <p className="project-note">{project.note}</p>}
+            <p className="project-description">{project.description}</p>
+
+            <div className="project-card-foot">
+              <ul className="project-tags" aria-label="Technologies">
+                {project.technologies.slice(0, 3).map((tech) => (
+                  <li key={tech} className="chip">{tech}</li>
+                ))}
+                {project.technologies.length > 3 && (
+                  <li className="chip is-more">+{project.technologies.length - 3}</li>
+                )}
+              </ul>
+              {/* Stretched over the whole card, so the card is one big target */}
+              <button
+                type="button"
+                className="project-open"
+                aria-haspopup="dialog"
+                aria-label={`View project: ${project.title}`}
+                onClick={(e) => setOpen({ project, opener: e.currentTarget })}
+              >
+                View project
+                <ArrowUpRight size={16} strokeWidth={2} />
+              </button>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+
+      {open && (
+        <Modal
+          label={open.project.title}
+          returnFocusTo={open.opener}
+          onClose={() => setOpen(null)}
+          className="project-modal"
+        >
+          <div className="project-modal-cover">
+            {open.project.year && <span className="project-year">{open.project.year}</span>}
+            <ProjectMedia project={open.project} />
+          </div>
+          <div className="project-modal-body">
+            <header className="project-modal-head">
+              <ProjectLogo project={open.project} />
+              <div>
+                <h3 className="project-modal-title">{open.project.title}</h3>
+                <p className="project-subtitle">{open.project.subtitle}</p>
+              </div>
+            </header>
+            <p className="project-type">{open.project.type}</p>
+            {open.project.note && <p className="project-note">{open.project.note}</p>}
+            <p className="project-modal-description">{open.project.description}</p>
+
+            {open.project.role && (
+              <div className="project-modal-block">
+                <h4 className="project-modal-label">My role</h4>
+                <p className="project-role">{open.project.role}</p>
+              </div>
+            )}
+
+            <div className="project-modal-block">
+              <h4 className="project-modal-label">Technologies used</h4>
+              <ul className="project-tags is-large">
+                {open.project.technologies.map((tech) => (
+                  <li key={tech} className="chip">{tech}</li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        </Modal>
+      )}
+    </section>
   )
 }
 

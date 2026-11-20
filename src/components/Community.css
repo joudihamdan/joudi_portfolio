@@ -7,16 +7,15 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
   gap: 1.5rem;
-  max-width: 1400px;
+  max-width: 1136px;
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
 .community-card {
   background: var(--surface);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 16px;
+  border-radius: var(--radius-md);
   padding: 1.75rem;
   border: 1px solid var(--surface-border);
   transition: all 0.3s ease;

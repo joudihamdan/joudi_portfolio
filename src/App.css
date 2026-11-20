@@ -27,11 +27,28 @@ section {
   margin-bottom: 0.85rem;
   color: var(--text-dark);
   letter-spacing: -0.01em;
+  line-height: 1.15;
 }
 
 .section-subtitle {
   font-size: 1.2rem;
   color: var(--text-light);
+}
+
+/* Shared chip: skills and technology tags (Skills, Experience, Projects) */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.32rem 0.75rem;
+  border-radius: 999px;
+  background: var(--chip-bg);
+  border: 1px solid var(--chip-border);
+  color: var(--text-dark);
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
 }
 
 @media (max-width: 768px) {

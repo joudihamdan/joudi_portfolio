@@ -82,7 +82,7 @@
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
   padding: 2rem;
-  border-radius: 15px;
+  border-radius: var(--radius-md);
   border: 1px solid var(--surface-border);
   box-shadow: 0 8px 32px var(--shadow-soft);
   transition: all 0.3s ease;
@@ -140,22 +140,57 @@
   margin-bottom: 0.4rem;
 }
 
+/* Multiple roles held at the same company */
+/* Roles at the same company, separated by a quiet horizontal rule so they
+   don't compete with the main timeline */
+.experience-role {
+  padding: 1rem 0;
+  border-top: 1px solid var(--rule);
+}
+
+.experience-role:last-of-type {
+  padding-bottom: 0.25rem;
+}
+
+/* Lead responsibility (Learning-Go redesign): a touch more weight */
+.experience-highlights li.is-lead {
+  color: var(--text-dark);
+  font-weight: 600;
+}
+
+.experience-highlights li.is-lead::marker {
+  color: var(--accent-strong);
+}
+
+.experience-role-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 0.75rem;
+  margin-bottom: 0.5rem;
+}
+
+.experience-role-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-dark);
+}
+
+.experience-role-period {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent-strong);
+}
+
+.experience-role .experience-highlights {
+  margin-bottom: 0;
+}
+
 .experience-technologies {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
   margin-top: 1rem;
-}
-
-.tech-badge {
-  padding: 0.3rem 0.8rem;
-  background: var(--surface-2);
-  backdrop-filter: blur(10px);
-  color: var(--text-dark);
-  border-radius: 15px;
-  font-size: 0.85rem;
-  font-weight: 500;
-  border: 1px solid var(--surface-border);
 }
 
 @media (max-width: 768px) {
@@ -196,7 +231,7 @@
 
   .experience-content {
     padding: 1.15rem 1.2rem;
-    border-radius: 12px;
+    border-radius: var(--radius-md);
   }
 
   .experience-period {
@@ -228,10 +263,5 @@
 
   .experience-highlights li {
     margin-bottom: 0.3rem;
-  }
-
-  .tech-badge {
-    font-size: 0.78rem;
-    padding: 0.25rem 0.65rem;
   }
 }

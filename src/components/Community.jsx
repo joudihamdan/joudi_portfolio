@@ -1,10 +1,19 @@
 import React from 'react'
 import { motion } from 'framer-motion'
-import { Users, Terminal, Target, Mic2, BookOpen } from 'lucide-react'
+import { reveal } from '../motion'
+import { Users, Target, Megaphone, BookOpen, Terminal } from 'lucide-react'
 import './Community.css'
 
 function Community() {
   const activities = [
+    {
+      period: 'Oct 2025',
+      title: 'Public Relations Coordinator',
+      organization: 'Flutter Bridge, Syria Tech Meetup',
+      description:
+        "Part of the organizing team for Flutter Bridge, one of Syria's first community events dedicated to Flutter, aimed at beginners and developers looking to start working with it. Coordinated public relations and outreach with the organizing team.",
+      Icon: Megaphone,
+    },
     {
       period: '2020 – 2025',
       title: 'Educational Content Creator',
@@ -12,14 +21,6 @@ function Community() {
       description:
         'Created and scripted educational content for university-level students across YouTube and live sessions, designing structured lecture materials that improved engagement and clarity.',
       Icon: BookOpen,
-    },
-    {
-      period: '2024',
-      title: 'Mobile Dev Meetup Organizer',
-      organization: 'Sanad Team for Development',
-      description:
-        'Organized community meetups for mobile developers covering security in mobile development, DevOps patterns, and cross-discipline knowledge sharing.',
-      Icon: Mic2,
     },
     {
       period: '2024',
@@ -32,7 +33,7 @@ function Community() {
     {
       period: '2022',
       title: 'Hackathon Coach',
-      organization: 'Teens in AI — Damascus Hackathon',
+      organization: 'Teens in AI, Damascus Hackathon',
       description:
         'Coached and mentored young developers through their hackathon journey, supporting problem-solving and technical guidance.',
       Icon: Users,
@@ -48,18 +49,11 @@ function Community() {
   ]
 
   return (
-    <motion.section
-      id="community"
-      className="community"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.6 }}
-    >
+    <section id="community-involvement" className="community">
       <div className="section-header">
-        <h2 className="section-title">Training &amp; Mentorship</h2>
+        <h2 className="section-title">Community Involvement</h2>
         <p className="section-subtitle">
-          Coaching, teaching, and mentoring across mobile development and the tech community
+          Organizing, mentoring, and contributing to the tech community
         </p>
       </div>
       <div className="community-grid">
@@ -67,10 +61,7 @@ function Community() {
           <motion.div
             key={activity.title}
             className="community-card"
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.08 }}
+            {...reveal()}
             whileHover={{ scale: 1.02, y: -5 }}
           >
             <div className="community-card-top">
@@ -85,7 +76,7 @@ function Community() {
           </motion.div>
         ))}
       </div>
-    </motion.section>
+    </section>
   )
 }
 

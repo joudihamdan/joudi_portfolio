@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
+import { reveal } from '../motion'
 import { ShieldCheck, KanbanSquare, Bot, Smartphone } from 'lucide-react'
 import './Experience.css'
 
@@ -9,66 +10,70 @@ function Experience() {
   const experiences = [
     {
       period: 'Nov 2025 – Present',
-      title: 'QA Engineer',
-      company: 'Learning Go',
-      location: 'Damascus, Syria',
+      title: 'Quality Assurance Engineer',
+      company: 'Learning-Go',
+      meta: 'Damascus, Syria · Full-time',
+      // The platform redesign is the headline responsibility
+      leadHighlight: true,
       description:
-        'Quality assurance for an educational platform, validating features across the full SDLC within an Agile team.',
+        'Sole QA Engineer for a web and mobile educational platform serving around 3,000 users, in production for over five years, working within an Agile team.',
       highlights: [
-        'Design and execute structured test cases covering functional, regression, and business-critical scenarios.',
-        'Collaborate with Product Owners to review requirements, refine user stories, and validate business rules.',
-        'Identify, document, prioritize, and track defects using Jira and GitLab through the full defect lifecycle.',
-        'Perform API testing to validate backend functionality and system integration.',
-        'Develop automated test scenarios for selected application features.',
-        'Document test cases, scenarios, and QA processes for traceability and team collaboration.',
-        'Participate in Agile ceremonies including backlog refinement, sprint planning, and release verification.',
+        'Own QA activities throughout a major platform redesign, validating new features while maintaining regression coverage for existing functionality ahead of release.',
+        'Review requirements and user stories with Product Owners to validate business rules and identify gaps before implementation.',
+        'Design and execute test cases covering functional, regression, exploratory, and critical business flows across web and mobile.',
+        'Perform API testing using Postman and Swagger, validating status codes, response data, input validation, and error handling.',
+        'Document and track defects in Jira and GitLab with clear reproduction steps, expected and actual results, severity, and priority.',
+        'Maintain test documentation and QA processes, and participate in sprint planning, backlog refinement, and release verification.',
       ],
-      technologies: ['Jira', 'GitLab', 'Postman', 'Swagger', 'Agile', 'Test Automation'],
+      technologies: ['Jira', 'GitLab', 'Postman', 'Swagger', 'Web & Mobile Testing', 'Agile'],
       Icon: ShieldCheck,
     },
     {
-      period: 'July 2025 – Oct 2025',
-      title: 'Scrum Master & QA Tester',
-      company: 'TechSauce',
-      location: 'Damascus, Syria',
-      description:
-        'Dual role leading Agile delivery and quality assurance across two concurrent software projects.',
-      highlights: [
-        'Led Agile ceremonies for two concurrent projects, ensuring task alignment and removing blockers.',
-        'Validated implemented features against acceptance criteria and business requirements before release.',
-        'Performed comprehensive manual testing to ensure applications matched technical specifications.',
-        'Monitored project progress and task distribution to ensure timely, high-quality delivery.',
+      // One company, two roles — each role carries its own title and dates.
+      title: 'Tech Sauce',
+      meta: 'Damascus, Syria · Contract',
+      roles: [
+        {
+          title: 'Scrum Master',
+          period: 'Aug 2025 – Nov 2025',
+          highlights: [
+            'Facilitated Agile ceremonies and coordinated sprint activities across two concurrent projects.',
+            'Tracked progress, identified blockers, and supported alignment on sprint priorities.',
+            'Reviewed delivered features against acceptance criteria before sprint reviews.',
+          ],
+        },
+        {
+          title: 'Mobile Application Developer',
+          period: 'Jan 2025 – Jul 2025',
+          highlights: [
+            'Developed mobile application features using Flutter, integrated REST APIs, and implemented state management solutions.',
+          ],
+        },
       ],
-      technologies: ['Jira', 'Scrum', 'Manual Testing', 'Agile', 'Acceptance Criteria'],
+      technologies: ['Scrum', 'Sprint Planning', 'Jira', 'Flutter', 'REST APIs'],
       Icon: KanbanSquare,
     },
     {
       period: 'Jun 2025 – Present',
-      title: 'Robotics & Programming Coach',
+      title: 'Robotics Instructor',
       company: 'Genius Planet Academy',
-      location: '',
+      meta: 'Part-time',
       description:
-        'Teaching robotics, Scratch, PictoBlox, and software-related topics to children and teenagers through hands-on STEM activities and interactive learning experiences.',
+        'Teach programming and robotics to children and teenagers through hands-on STEM activities.',
       highlights: [
-        'Teaching Scratch',
-        'Teaching PictoBlox',
-        'Teaching robotics concepts',
-        'Teaching software-related learning tracks',
-        'Designing educational activities for different age groups',
-        'Encouraging creativity, logical thinking, and problem-solving',
+        'Teach programming concepts using Scratch and PictoBlox.',
+        'Design interactive activities that build logical thinking and problem-solving.',
       ],
       technologies: ['Robotics', 'Scratch', 'PictoBlox', 'STEM Education'],
       Icon: Bot,
     },
     {
-      period: '2024 – 2025',
-      title: 'Assistant Flutter Coach',
-      company: 'Sanad Development Team',
-      location: '',
+      period: 'Sep 2024 – Feb 2025',
+      title: 'Flutter Training Assistant',
+      company: 'Sanad Youth',
       description:
-        'Supported and mentored junior developers in learning Flutter, simplifying technical concepts and guiding hands-on mobile development practice.',
-      highlights: [],
-      technologies: ['Flutter', 'Mobile Development', 'Mentoring'],
+        'Supported a Flutter training program delivered by FreelancerHub in collaboration with Sanad Development Team, helping students with hands-on practice and technical questions.',
+      technologies: ['Flutter', 'Training'],
       Icon: Smartphone,
     },
   ]
@@ -77,15 +82,11 @@ function Experience() {
     <motion.section
       id="experience"
       className="experience"
-      initial={{ opacity: 0, y: 50 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.1 }}
-      transition={{ duration: 0.8 }}
     >
       <div className="section-header">
         <h2 className="section-title">Experience</h2>
         <p className="section-subtitle">
-          Professional experience across QA, Agile delivery, coaching, and mentorship
+          Professional experience across QA, Agile delivery, development, and teaching
         </p>
       </div>
       <div className="experience-container">
@@ -95,10 +96,7 @@ function Experience() {
             key={role.title}
             className={`experience-item ${activeIndex === index ? 'active' : ''}`}
             onClick={() => setActiveIndex(activeIndex === index ? null : index)}
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.5, delay: index * 0.1 }}
+            {...reveal({ x: -16, y: 0 })}
             whileHover={{ scale: 1.02, x: 10 }}
           >
             <div className="experience-marker">
@@ -107,22 +105,37 @@ function Experience() {
               </span>
             </div>
             <div className="experience-content">
-              <div className="experience-period">{role.period}</div>
+              {role.period && <div className="experience-period">{role.period}</div>}
               <h3 className="experience-title">{role.title}</h3>
               <p className="experience-company">
-                {role.company}{role.location ? ` · ${role.location}` : ''}
+                {[role.company, role.meta].filter(Boolean).join(' · ')}
               </p>
-              <p className="experience-description">{role.description}</p>
-              {role.highlights.length > 0 && (
+              {role.description && <p className="experience-description">{role.description}</p>}
+              {role.highlights?.length > 0 && (
                 <ul className="experience-highlights">
                   {role.highlights.map((item, i) => (
-                    <li key={i}>{item}</li>
+                    <li key={i} className={role.leadHighlight && i === 0 ? 'is-lead' : undefined}>
+                      {item}
+                    </li>
                   ))}
                 </ul>
               )}
+              {role.roles?.map((sub) => (
+                <div key={sub.title} className="experience-role">
+                  <div className="experience-role-head">
+                    <h4 className="experience-role-title">{sub.title}</h4>
+                    <span className="experience-role-period">{sub.period}</span>
+                  </div>
+                  <ul className="experience-highlights">
+                    {sub.highlights.map((item, i) => (
+                      <li key={i}>{item}</li>
+                    ))}
+                  </ul>
+                </div>
+              ))}
               <div className="experience-technologies">
                 {role.technologies.map((tech) => (
-                  <span key={tech} className="tech-badge">
+                  <span key={tech} className="chip">
                     {tech}
                   </span>
                 ))}

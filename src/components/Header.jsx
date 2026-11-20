@@ -36,7 +36,7 @@ function Header({ isDarkMode, toggleDarkMode }) {
     { id: 'experience', label: 'Experience' },
     { id: 'skills', label: 'Skills' },
     { id: 'projects', label: 'Projects' },
-    { id: 'community', label: 'Mentorship' },
+    { id: 'community-involvement', label: 'Community' },
     { id: 'education', label: 'Education' },
     { id: 'contact', label: 'Contact' },
   ]

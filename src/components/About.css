@@ -26,9 +26,14 @@
 .about-lead {
   max-width: 680px;
   margin: 0 auto;
+  text-align: left; /* long paragraphs read better ragged-right */
   font-size: 1.05rem;
   line-height: 1.8;
   color: var(--text-light);
+}
+
+.about-lead + .about-lead {
+  margin-top: 1.1rem;
 }
 
 /* ---- How I Think About Quality: three steps on one hairline ---- */
@@ -128,11 +133,18 @@
   font-size: 2.25rem;
   font-weight: 700;
   line-height: 1.2;
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-beige));
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
+  /* Solid accent: #A85062 on the off-white page is ~5.4:1 (WCAG AA) */
+  color: var(--accent-strong);
   margin-bottom: 0.35rem;
+}
+
+.stat-unit {
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent-strong);
+  margin-bottom: 0.25rem;
 }
 
 .stat-label {

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import { motion } from 'framer-motion'
-import { Mail, Phone, MapPin, Download } from 'lucide-react'
+import { reveal } from '../motion'
+import { Mail, MapPin, Download } from 'lucide-react'
 import './Contact.css'
 
 // Inline LinkedIn glyph — lucide-react dropped the brand icon in v1.x,
@@ -62,21 +63,15 @@ function Contact() {
       href: 'mailto:joudihamdan216@gmail.com',
     },
     {
-      Icon: Phone,
-      label: 'Phone',
-      value: '+963 936706169',
-      href: 'tel:+963936706169',
+      Icon: LinkedinIcon,
+      label: 'LinkedIn',
+      value: 'linkedin.com/in/joudi-hamdan',
+      href: 'https://www.linkedin.com/in/joudi-hamdan',
     },
     {
       Icon: MapPin,
       label: 'Location',
       value: 'Damascus, Syria',
-    },
-    {
-      Icon: LinkedinIcon,
-      label: 'LinkedIn',
-      value: 'linkedin.com/in/joudi-hamdan',
-      href: 'https://www.linkedin.com/in/joudi-hamdan',
     },
   ]
 
@@ -84,15 +79,12 @@ function Contact() {
     <motion.section
       id="contact"
       className="contact"
-      initial={{ opacity: 0 }}
-      whileInView={{ opacity: 1 }}
-      viewport={{ once: true, amount: 0.3 }}
-      transition={{ duration: 0.6 }}
+      {...reveal({ y: 0 })}
     >
       <div className="section-header">
         <h2 className="section-title">Get In Touch</h2>
         <p className="section-subtitle">
-          Open to QA Engineer opportunities — let's connect
+          Open to QA Engineer opportunities. Let's connect.
         </p>
       </div>
       <div className="contact-content">

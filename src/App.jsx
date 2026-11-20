@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react'
-import { motion } from 'framer-motion'
 import Header from './components/Header'
 import Hero from './components/Hero'
 import About from './components/About'
@@ -38,25 +37,11 @@ function App() {
     }
   }
 
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: {
-        staggerChildren: 0.1,
-      },
-    },
-  }
-
   return (
     <div className="App">
       <AnimatedBackground isDarkMode={isDarkMode} />
       <MouseTrail isDarkMode={isDarkMode} />
-      <motion.div
-        variants={containerVariants}
-        initial="hidden"
-        animate="visible"
-      >
+      <div>
         <Header isDarkMode={isDarkMode} toggleDarkMode={toggleDarkMode} />
         <Hero />
         <About />
@@ -67,7 +52,7 @@ function App() {
         <Education />
         <Contact />
         <Footer />
-      </motion.div>
+      </div>
     </div>
   )
 }

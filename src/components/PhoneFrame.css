@@ -1,0 +1,21 @@
+.phone-frame {
+  /* --phone-w is the size the layout asks for; the frame never grows past
+     the screenshot's natural width (+ its border). */
+  --phone-w: 180px;
+  --frame-border: 2px;
+  width: min(var(--phone-w), calc(var(--natural-w) + var(--frame-border) * 2));
+  max-width: 100%;
+  border: var(--frame-border) solid #1f1b1d;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #1f1b1d;
+  box-shadow: 0 14px 34px rgba(60, 30, 40, 0.18), 0 3px 8px rgba(60, 30, 40, 0.10);
+  flex-shrink: 0;
+}
+
+.phone-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: var(--natural-w);
+}

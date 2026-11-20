@@ -1,75 +1,60 @@
 import React from 'react'
 import { motion } from 'framer-motion'
+import { reveal } from '../motion'
 import './About.css'
 
 function About() {
-  const containerVariants = {
-    hidden: { opacity: 0 },
-    visible: {
-      opacity: 1,
-      transition: { staggerChildren: 0.15 },
-    },
-  }
-
-  const itemVariants = {
-    hidden: { opacity: 0, y: 24 },
-    visible: {
-      opacity: 1,
-      y: 0,
-      transition: { duration: 0.6 },
-    },
-  }
-
   const qualitySteps = [
     {
-      title: 'Understand',
-      description: 'Analyze requirements, user flows, and expected behavior.',
+      title: 'Understand the Context',
+      description:
+        'Requirements, business rules, user expectations, and the risks behind each feature.',
     },
     {
-      title: 'Test',
+      title: 'Challenge the Behavior',
       description:
-        'Explore edge cases, failures, and unexpected behavior beyond the happy path.',
+        'Happy paths, edge cases, failure scenarios, and unexpected system behavior.',
     },
     {
-      title: 'Improve',
+      title: 'Improve the Outcome',
       description:
-        'Communicate findings clearly and collaborate with the team to improve product quality.',
+        'Clear, actionable findings and close collaboration with the team to fix what matters.',
     },
   ]
 
   const stats = [
-    { value: '2+', label: 'QA & Agile Roles' },
-    { value: '4+', label: 'Engineering Projects' },
-    { value: '1', label: 'Published App' },
+    { value: '1+', unit: 'Year', label: 'QA Experience' },
+    { value: '~3K', unit: 'Users', label: 'Learners on Platform' },
+    { value: '4', unit: 'Apps', label: 'Flutter Projects' },
   ]
 
   return (
-    <motion.section
-      id="about"
-      className="about"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.1 }}
-      variants={containerVariants}
-    >
+    <section id="about" className="about">
       <div className="section-header">
         <h2 className="section-title">About Me</h2>
       </div>
 
       <div className="about-content">
-        <motion.div className="about-intro" variants={itemVariants}>
+        <motion.div className="about-intro" {...reveal()}>
           <h3 className="about-headline">
-            QA Engineer with a Software Engineering Foundation
+            A Technical Approach to Software Quality
           </h3>
           <p className="about-lead">
-            With a software engineering background, I approach QA beyond surface-level UI
-            checks. I understand the logic behind features, APIs, and application flows, which
-            helps me design meaningful tests and communicate effectively with development and
-            product teams.
+            Before moving into QA, I built mobile applications with Flutter. That experience
+            shapes how I test: I don't stop at whether a feature works on screen. I look at the
+            logic behind it, how data moves through the APIs, and what happens when things don't
+            go as expected.
+          </p>
+          <p className="about-lead">
+            In my current role, I manage QA activities end to end, from reviewing requirements
+            with Product Owners to verifying releases. I'm responsible for QA throughout a major
+            redesign of a platform that has been in production for over five years. My development
+            background helps me investigate issues across the UI, APIs, and business logic, and
+            communicate findings in a way developers can act on quickly.
           </p>
         </motion.div>
 
-        <motion.div className="quality" variants={itemVariants}>
+        <motion.div className="quality" {...reveal()}>
           <h3 className="quality-title">How I Think About Quality</h3>
           <ol className="quality-steps">
             {qualitySteps.map((step, index) => (
@@ -87,16 +72,17 @@ function About() {
           </ol>
         </motion.div>
 
-        <motion.div className="about-stats" variants={itemVariants}>
+        <motion.div className="about-stats" {...reveal()}>
           {stats.map((stat) => (
             <div key={stat.label} className="stat-item">
               <div className="stat-number">{stat.value}</div>
+              <div className="stat-unit">{stat.unit}</div>
               <div className="stat-label">{stat.label}</div>
             </div>
           ))}
         </motion.div>
       </div>
-    </motion.section>
+    </section>
   )
 }
 
