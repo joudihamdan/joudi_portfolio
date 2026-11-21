@@ -159,14 +159,7 @@ A booking app for a beauty clinic: browse services by category, book appointment
 
 **Tags:** Flutter · GetX · Firebase
 
-**Media:** folder `dahab-clinic/` · logo `logo.png` · card shows 01-home
-
-**Gallery captions:**
-1. Home with categories, top services, and offers
-2. Services within a category
-3. Booking with available time slots
-4. Validation: weekends cannot be booked
-5. Managing pending, in-progress, and completed sessions
+**Media:** none (text-only card)
 
 ### MERSOOL — Food Delivery App
 *Flutter Development*

@@ -97,7 +97,6 @@ function Experience() {
             className={`experience-item ${activeIndex === index ? 'active' : ''}`}
             onClick={() => setActiveIndex(activeIndex === index ? null : index)}
             {...reveal({ x: -16, y: 0 })}
-            whileHover={{ scale: 1.02, x: 10 }}
           >
             <div className="experience-marker">
               <span className="experience-icon">

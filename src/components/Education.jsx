@@ -25,7 +25,6 @@ function Education() {
             key={index}
             className="education-card"
             {...reveal()}
-            whileHover={{ scale: 1.02, y: -5 }}
           >
             <div className="education-icon">
               <GraduationCap size={32} strokeWidth={1.5} />

@@ -35,6 +35,61 @@ section {
   color: var(--text-light);
 }
 
+/* Short accent rule under each centred section title */
+.section-header .section-title::after {
+  content: '';
+  display: block;
+  width: 40px;
+  height: 3px;
+  margin: 0.8rem auto 0;
+  border-radius: 2px;
+  background: var(--accent-strong);
+}
+
+/* Card hover: a slight lift and softer shadow, only with a real pointer
+   (no movement on touch devices) and never with reduced motion */
+.experience-content,
+.skills-card,
+.project-card,
+.community-card,
+.education-card {
+  /* `translate` (not `transform`) so the lift composes with the inline
+     transform framer-motion uses for the scroll reveal */
+  transition: translate 0.2s ease, box-shadow 0.2s ease, background 0.2s ease, border-color 0.2s ease;
+}
+
+@media (hover: hover) and (pointer: fine) and (prefers-reduced-motion: no-preference) {
+  .experience-item:hover .experience-content,
+  .skills-card:hover,
+  .project-card:hover,
+  .community-card:hover,
+  .education-card:hover {
+    translate: 0 -3px;
+    box-shadow: 0 14px 30px -14px rgba(70, 35, 45, 0.22);
+  }
+
+  :root[data-theme="dark"] .experience-item:hover .experience-content,
+  :root[data-theme="dark"] .skills-card:hover,
+  :root[data-theme="dark"] .project-card:hover,
+  :root[data-theme="dark"] .community-card:hover,
+  :root[data-theme="dark"] .education-card:hover {
+    box-shadow: 0 14px 30px -14px rgba(0, 0, 0, 0.6);
+  }
+}
+
+/* Visually hidden, still read by screen readers */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Shared chip: skills and technology tags (Skills, Experience, Projects) */
 .chip {
   display: inline-flex;

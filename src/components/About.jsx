@@ -1,7 +1,51 @@
-import React from 'react'
+import React, { useEffect, useRef } from 'react'
 import { motion } from 'framer-motion'
-import { reveal } from '../motion'
+import { prefersReducedMotion, reveal } from '../motion'
 import './About.css'
+
+// Counts the number part of a stat (e.g. the 3 in "~3K") up from 0 the first
+// time it scrolls into view. The prefix and suffix stay fixed; screen readers
+// get the final value. With reduced motion the final value is shown as-is.
+function CountUp({ value }) {
+  const [, prefix, digits, suffix] = value.match(/^(\D*)(\d+)(.*)$/) || [null, '', value, '']
+  const target = Number(digits)
+  const numRef = useRef(null)
+
+  useEffect(() => {
+    if (prefersReducedMotion || !Number.isFinite(target)) return undefined
+    const el = numRef.current
+    el.textContent = '0'
+    let raf = 0
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return
+      io.disconnect()
+      const start = performance.now()
+      const step = (now) => {
+        const t = Math.min((now - start) / 1200, 1)
+        const eased = 1 - Math.pow(1 - t, 3)
+        el.textContent = String(Math.round(target * eased))
+        if (t < 1) raf = requestAnimationFrame(step)
+      }
+      raf = requestAnimationFrame(step)
+    })
+    io.observe(el)
+    return () => {
+      io.disconnect()
+      cancelAnimationFrame(raf)
+    }
+  }, [target])
+
+  return (
+    <>
+      <span aria-hidden="true">
+        {prefix}
+        <span ref={numRef}>{digits}</span>
+        {suffix}
+      </span>
+      <span className="sr-only">{value}</span>
+    </>
+  )
+}
 
 function About() {
   const qualitySteps = [
@@ -75,7 +119,7 @@ function About() {
         <motion.div className="about-stats" {...reveal()}>
           {stats.map((stat) => (
             <div key={stat.label} className="stat-item">
-              <div className="stat-number">{stat.value}</div>
+              <div className="stat-number"><CountUp value={stat.value} /></div>
               <div className="stat-unit">{stat.unit}</div>
               <div className="stat-label">{stat.label}</div>
             </div>

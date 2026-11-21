@@ -1,9 +1,20 @@
 import React, { useState, useEffect } from 'react'
 import './Header.css'
 
+const navItems = [
+  { id: 'about', label: 'About' },
+  { id: 'experience', label: 'Experience' },
+  { id: 'skills', label: 'Skills' },
+  { id: 'projects', label: 'Projects' },
+  { id: 'community-involvement', label: 'Community' },
+  { id: 'education', label: 'Education' },
+  { id: 'contact', label: 'Contact' },
+]
+
 function Header({ isDarkMode, toggleDarkMode }) {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
+  const [activeId, setActiveId] = useState(null)
 
   useEffect(() => {
     // Coalesce scroll events into one read per frame; passive so the listener
@@ -23,6 +34,23 @@ function Header({ isDarkMode, toggleDarkMode }) {
     }
   }, [])
 
+  // Scroll spy: the section crossing a thin band ~40% down the viewport is
+  // the "current" one. IntersectionObserver keeps this off the scroll path.
+  useEffect(() => {
+    const ids = ['hero', ...navItems.map((item) => item.id)]
+    const sections = ids.map((id) => document.getElementById(id)).filter(Boolean)
+    const io = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveId(entry.target.id === 'hero' ? null : entry.target.id)
+        })
+      },
+      { rootMargin: '-40% 0px -55% 0px' }
+    )
+    sections.forEach((el) => io.observe(el))
+    return () => io.disconnect()
+  }, [])
+
   const scrollToSection = (id) => {
     const element = document.getElementById(id)
     if (element) {
@@ -31,15 +59,6 @@ function Header({ isDarkMode, toggleDarkMode }) {
     }
   }
 
-  const navItems = [
-    { id: 'about', label: 'About' },
-    { id: 'experience', label: 'Experience' },
-    { id: 'skills', label: 'Skills' },
-    { id: 'projects', label: 'Projects' },
-    { id: 'community-involvement', label: 'Community' },
-    { id: 'education', label: 'Education' },
-    { id: 'contact', label: 'Contact' },
-  ]
 
   return (
     <header className={`header ${isScrolled ? 'scrolled' : ''} ${isDarkMode ? 'dark' : ''}`}>
@@ -52,6 +71,8 @@ function Header({ isDarkMode, toggleDarkMode }) {
             <a
               key={item.id}
               href={`#${item.id}`}
+              className={activeId === item.id ? 'is-active' : undefined}
+              aria-current={activeId === item.id ? 'location' : undefined}
               onClick={(e) => {
                 e.preventDefault()
                 scrollToSection(item.id)

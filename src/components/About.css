@@ -130,6 +130,7 @@
 }
 
 .stat-number {
+  font-variant-numeric: tabular-nums; /* digits keep their width while counting */
   font-size: 2.25rem;
   font-weight: 700;
   line-height: 1.2;

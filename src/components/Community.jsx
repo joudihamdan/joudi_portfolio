@@ -62,7 +62,6 @@ function Community() {
             key={activity.title}
             className="community-card"
             {...reveal()}
-            whileHover={{ scale: 1.02, y: -5 }}
           >
             <div className="community-card-top">
               <div className="community-icon">

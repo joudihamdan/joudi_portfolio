@@ -2,68 +2,8 @@ import React from 'react'
 import { motion } from 'framer-motion'
 import { Download } from 'lucide-react'
 import { prefersReducedMotion, REVEAL_DURATION } from '../motion'
+import { HeroDrawing, HeroFlowStrip } from './HeroFlow'
 import './Hero.css'
-
-// A light line drawing on the hero background: the testing flow from
-// requirements to release, with a small test-case sheet. Decorative only.
-const flow = [
-  { x: 60, y: 70, label: 'Requirements', above: true },
-  { x: 300, y: 130, label: 'Test design' },
-  { x: 110, y: 250, label: 'Execution' },
-  { x: 340, y: 330, label: 'Defects' },
-  { x: 190, y: 440, label: 'Release', done: true },
-]
-
-// Small screens: the same flow as one compact horizontal strip, with labels
-// alternating above and below the line so every word stays full size.
-function HeroFlowStrip() {
-  return (
-    <ol className="hero-flow-strip" aria-hidden="true">
-      {flow.map((n) => (
-        <li key={n.label} className={n.done ? 'is-done' : undefined}>
-          <span className="hfs-dot">
-            {n.done && (
-              <svg viewBox="0 0 12 12">
-                <path d="M2.5 6.2 l2.3 2.3 l4.7 -5" />
-              </svg>
-            )}
-          </span>
-          <span className="hfs-label">{n.label}</span>
-        </li>
-      ))}
-    </ol>
-  )
-}
-
-function HeroDrawing() {
-  return (
-    <svg className="hero-drawing" viewBox="0 0 520 520" aria-hidden="true" focusable="false">
-      <path
-        className="hd-path"
-        pathLength="1"
-        d="M60,70 C180,70 300,60 300,130 C300,200 110,180 110,250 C110,320 340,260 340,330 C340,400 190,380 190,440"
-      />
-      {flow.map((n, i) => (
-        <g key={n.label} className="hd-node" style={{ '--i': i }}>
-          <circle cx={n.x} cy={n.y} r={n.done ? 12 : 7} className={n.done ? 'is-done' : ''} />
-          {n.done && <path className="hd-check" d={`M${n.x - 5},${n.y} l3.5,3.5 l6.5,-7`} />}
-          <text x={n.above ? n.x - 7 : n.x + (n.done ? 22 : 18)} y={n.above ? n.y - 18 : n.y + 4.5}>{n.label}</text>
-        </g>
-      ))}
-      <g className="hd-sheet">
-        <rect x="350" y="390" width="140" height="100" rx="12" />
-        <line x1="368" y1="410" x2="420" y2="410" className="hd-bar" />
-        {[432, 454, 476].map((y, i) => (
-          <g key={y}>
-            <rect x="368" y={y - 6} width="12" height="12" rx="3" />
-            {i < 2 && <path className="hd-tick" d={`M370.5,${y} l2.5,2.5 l5,-5`} />}
-            <line x1="390" y1={y} x2={i === 1 ? 448 : 470} y2={y} className="hd-bar is-light" />
-          </g>
-        ))}
-      </g>
-    </svg>
-  )
-}
 
 function Hero() {
   const scrollToSection = (id) => {
@@ -100,6 +40,10 @@ function Hero() {
           <motion.h2 className="hero-subtitle-large" variants={item}>
             QA Engineer · Software Engineering Background
           </motion.h2>
+          <motion.p className="hero-status" variants={item}>
+            <span className="hero-status-dot" aria-hidden="true" />
+            Open to QA opportunities
+          </motion.p>
           <motion.p className="hero-description-large" variants={item}>
             Sole QA Engineer responsible for testing a live web &amp; mobile educational platform
             used by around 3,000 learners. My Flutter development background helps me look beyond

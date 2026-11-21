@@ -7,10 +7,15 @@ import {
   ChevronRight,
   Bike,
   CalendarCheck,
+  CircleCheck,
   Clock,
   Coffee,
+  Flower2,
+  Gem,
+  Hourglass,
   MapPin,
   Pizza,
+  Sparkles,
   Store,
   UtensilsCrossed,
 } from 'lucide-react'
@@ -55,11 +60,11 @@ const projects = [
     description:
       'A booking app for a beauty clinic: browse services by category, book appointments based on doctor availability, and manage sessions (pending, in progress, completed). Includes offers, reviews, guest mode, multi-language support, and light/dark themes.',
     technologies: ['Flutter', 'GetX', 'Firebase'],
-    coverScreens: ['03-booking', '01-home', '05-sessions'],
-    captions: {
-      '01-home': 'Home with categories, top services, and offers',
-      '03-booking': 'Booking with available time slots',
-      '05-sessions': 'Managing pending, in-progress, and completed sessions',
+    // Text-only like MERSOOL and RIDESHARE: a drawn cover, no screenshots
+    Icon: CalendarCheck,
+    drawn: {
+      left: { label: 'Services', rows: [Sparkles, Flower2, Gem] },
+      right: { label: 'Sessions', rows: [Clock, Hourglass, CircleCheck] },
     },
   },
   {
@@ -232,21 +237,38 @@ function DrawnCover({ project }) {
         <span className="drawn-cta" />
       </div>
 
-      <div className="drawn-panel drawn-map">
-        <span className="drawn-label">{right.label}</span>
-        <svg viewBox="0 0 200 120" className="drawn-route">
-          <path d="M28 92 C 60 92, 64 40, 104 52 S 150 86, 172 30" />
-        </svg>
-        <span className="drawn-pin is-start">
-          <MapPin strokeWidth={1.5} />
-        </span>
-        <span className="drawn-pin is-end">
-          <MapPin strokeWidth={1.5} />
-        </span>
-        <span className="drawn-bars">
-          <i />
-        </span>
-      </div>
+      {right.rows ? (
+        <div className="drawn-panel drawn-list drawn-right">
+          <span className="drawn-label">{right.label}</span>
+          {right.rows.map((RowIcon, i) => (
+            <div key={i} className="drawn-row">
+              <span className="drawn-row-icon">
+                <RowIcon strokeWidth={1.5} />
+              </span>
+              <span className="drawn-bars">
+                <i />
+                <i />
+              </span>
+            </div>
+          ))}
+        </div>
+      ) : (
+        <div className="drawn-panel drawn-map drawn-right">
+          <span className="drawn-label">{right.label}</span>
+          <svg viewBox="0 0 200 120" className="drawn-route">
+            <path d="M28 92 C 60 92, 64 40, 104 52 S 150 86, 172 30" />
+          </svg>
+          <span className="drawn-pin is-start">
+            <MapPin strokeWidth={1.5} />
+          </span>
+          <span className="drawn-pin is-end">
+            <MapPin strokeWidth={1.5} />
+          </span>
+          <span className="drawn-bars">
+            <i />
+          </span>
+        </div>
+      )}
     </div>
   )
 }
@@ -254,8 +276,8 @@ function DrawnCover({ project }) {
 function ProjectMedia({ project }) {
   const { screens } = mediaFor(project.slug)
   if (screens.length && project.gallery) return <ScreenGallery project={project} screens={screens} />
-  if (screens.length) return <ScreenRow project={project} screens={screens} />
   if (project.drawn) return <DrawnCover project={project} />
+  if (screens.length) return <ScreenRow project={project} screens={screens} />
   return null
 }
 

@@ -31,14 +31,6 @@
   transition: all 0.3s ease;
 }
 
-.experience-item:hover {
-  transform: translateX(10px);
-}
-
-.experience-item.active {
-  transform: translateX(10px);
-}
-
 .experience-marker {
   position: absolute;
   left: 0;
@@ -85,7 +77,6 @@
   border-radius: var(--radius-md);
   border: 1px solid var(--surface-border);
   box-shadow: 0 8px 32px var(--shadow-soft);
-  transition: all 0.3s ease;
   position: relative;
   z-index: 1;
 }
@@ -93,7 +84,6 @@
 .experience-item:hover .experience-content,
 .experience-item.active .experience-content {
   background: var(--surface-2);
-  box-shadow: 0 12px 40px var(--glow);
   border-color: var(--glow-border);
 }
 
@@ -213,11 +203,6 @@
   }
 
   /* No horizontal shift on touch screens */
-  .experience-item:hover,
-  .experience-item.active {
-    transform: none;
-  }
-
   .experience-marker {
     width: 36px;
     height: 36px;

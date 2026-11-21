@@ -4,93 +4,108 @@
 
 .contact-content {
   display: grid;
-  grid-template-columns: 1fr 1.5fr;
-  gap: 4rem;
-  max-width: 1200px;
+  grid-template-columns: 1fr 1fr;
+  align-items: stretch; /* both cards share the taller one's height */
+  gap: 1.25rem;
+  max-width: 1136px;
   margin: 0 auto;
-  padding: 0 2rem;
 }
 
-.contact-info {
-  display: flex;
-  flex-direction: column;
-  gap: 2rem;
-}
-
-.info-item {
-  display: flex;
-  gap: 1.5rem;
-  align-items: flex-start;
-}
-
-.info-icon {
-  width: 60px;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background: linear-gradient(135deg, var(--accent-pink), var(--accent-beige));
-  border-radius: 12px;
-  flex-shrink: 0;
-  color: var(--text-dark);
-}
-
-.info-item a {
-  color: var(--text-light);
-  text-decoration: none;
-  transition: color 0.2s ease;
-}
-
-.info-item a:hover {
-  color: var(--accent-pink);
-}
-
-.info-item h3 {
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 0.5rem;
-  color: var(--text-color);
-}
-
-.info-item p {
-  color: var(--text-light);
-}
-
-.contact-cv-btn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  align-self: flex-start;
-  margin-top: 0.5rem;
-  padding: 0.75rem 1.5rem;
-  border-radius: 50px;
-  font-weight: 600;
-  color: var(--text-dark);
-  background: var(--glass-bg);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border: 1px solid var(--glass-border);
-  box-shadow: 0 4px 15px var(--shadow-soft);
-  transition: all 0.3s ease;
-}
-
-.contact-cv-btn:hover {
-  background: rgba(var(--accent-pink-rgb), 0.1);
-  border-color: var(--accent-pink);
-  transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(var(--accent-pink-rgb), 0.3);
-}
-
-.contact-form {
+/* One card style for the details and the form */
+.contact-card {
+  padding: 2rem;
+  border-radius: var(--radius-md);
   background: var(--surface);
   backdrop-filter: blur(20px) saturate(180%);
   -webkit-backdrop-filter: blur(20px) saturate(180%);
-  padding: 2rem;
-  border-radius: var(--radius-md);
   border: 1px solid var(--surface-border);
   box-shadow: 0 8px 32px var(--shadow-soft);
 }
 
+/* ---- Contact details ---- */
+.contact-info {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Same size, weight, and top position as the form's first label */
+.contact-card-title {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: 500;
+  line-height: 1.6;
+  color: var(--text-color);
+}
+
+/* The three items share the card's height evenly */
+.contact-list {
+  list-style: none;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  gap: 0.75rem;
+}
+
+.info-item {
+  display: flex;
+  align-items: center;
+  gap: 1.1rem;
+  padding: 0.85rem 1rem;
+  margin: 0 -1rem;
+  border-radius: var(--radius-sm);
+}
+
+.info-item.is-link {
+  color: inherit;
+  transition: background 0.2s ease;
+}
+
+.info-item.is-link:hover {
+  background: var(--tint-strong);
+}
+
+.info-item.is-link:hover .info-value {
+  color: var(--accent-strong);
+}
+
+.info-item.is-link:focus-visible {
+  outline: 2px solid var(--accent-strong);
+  outline-offset: 2px;
+}
+
+.info-icon {
+  width: 52px;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--accent-pink), var(--accent-beige));
+  color: var(--text-dark);
+}
+
+.info-text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.info-label {
+  font-size: 1.05rem;
+  font-weight: 600;
+  color: var(--text-dark);
+}
+
+.info-value {
+  font-size: 0.98rem;
+  color: var(--text-light);
+  overflow-wrap: anywhere;
+  transition: color 0.2s ease;
+}
+
+/* ---- Form ---- */
 .form-group {
   margin-bottom: 1.5rem;
 }
@@ -185,9 +200,19 @@
 }
 
 @media (max-width: 968px) {
+  /* Stacked: details first, both full width */
   .contact-content {
     grid-template-columns: 1fr;
-    gap: 3rem;
+  }
+
+  .contact-list {
+    gap: 0.25rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .contact-card {
+    padding: 1.5rem 1.25rem;
   }
 }
 

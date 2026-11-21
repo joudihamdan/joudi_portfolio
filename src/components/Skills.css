@@ -34,7 +34,6 @@
   background: var(--surface);
   border: 1px solid var(--rule);
   cursor: pointer;
-  transition: border-color 0.25s ease, background 0.25s ease;
 }
 
 .skills-card:hover {

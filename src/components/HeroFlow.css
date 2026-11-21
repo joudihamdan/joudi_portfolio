@@ -1,0 +1,285 @@
+/* QA flow illustration. Only transform, opacity, and stroke-dashoffset are
+   animated; the travelling dot is positioned with transform from JS. */
+
+.hero-drawing {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  overflow: visible;
+  --hd-line: rgba(var(--accent-strong-rgb), 0.42);
+  --hd-soft: rgba(var(--accent-strong-rgb), 0.08);
+}
+
+/* Path draws in from Requirements to Release */
+.hd-path {
+  fill: none;
+  stroke: var(--hd-line);
+  stroke-width: 1.5;
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation-name: hd-draw;
+  animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  animation-fill-mode: forwards;
+}
+
+/* Each stage appears as the line reaches it (delay set per node) */
+.hd-node {
+  opacity: 0;
+  animation: hd-fade 0.35s ease-out var(--d) forwards;
+}
+
+.hd-dot {
+  fill: var(--bg-color);
+  stroke: var(--hd-line);
+  stroke-width: 1.5;
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: hd-pop 0.35s cubic-bezier(0.33, 1, 0.68, 1) var(--d) both;
+}
+
+.hd-dot.is-done {
+  fill: rgba(var(--accent-strong-rgb), 0.12);
+}
+
+/* Soft highlight while the travelling dot passes */
+.hd-halo {
+  fill: rgba(var(--accent-strong-rgb), 0.14);
+  opacity: 0;
+  transform-box: fill-box;
+  transform-origin: center;
+  transform: scale(0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hd-node.is-hit .hd-halo {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Release is checked off when the dot arrives */
+.hd-check {
+  fill: none;
+  stroke: var(--accent-strong);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hd-node.is-checked .hd-check {
+  opacity: 1;
+}
+
+.hero-drawing text {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  letter-spacing: 0.02em;
+  fill: rgba(var(--accent-strong-rgb), 0.75);
+}
+
+/* Travelling dot */
+.hd-runner {
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+.hd-runner-dot {
+  fill: var(--accent-strong);
+}
+
+.hd-runner-glow {
+  fill: rgba(var(--accent-strong-rgb), 0.18);
+}
+
+/* Test-case sheet fades in once the path is drawn */
+.hd-sheet {
+  opacity: 0;
+  animation: hd-fade 0.6s ease-out forwards;
+}
+
+.hd-sheet rect {
+  fill: var(--hd-soft);
+  stroke: var(--hd-line);
+  stroke-width: 1.2;
+}
+
+.hd-tick {
+  fill: none;
+  stroke: var(--accent-strong);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hd-bar {
+  stroke: rgba(var(--accent-strong-rgb), 0.35);
+  stroke-width: 5;
+  stroke-linecap: round;
+}
+
+.hd-bar.is-light {
+  stroke: rgba(var(--accent-strong-rgb), 0.16);
+  stroke-width: 4;
+}
+
+/* ---------- Compact horizontal strip (small screens only) ---------- */
+.hero-flow-strip {
+  display: none;
+  position: relative;
+  width: 100%;
+  max-width: 460px;
+  height: 76px;
+  margin: 0 auto 1.25rem;
+}
+
+.hfs-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  height: 100%;
+}
+
+/* The line runs between the first and last dot centres, drawn left to right */
+.hfs-line {
+  position: absolute;
+  top: 50%;
+  left: 10%;
+  right: 10%;
+  height: 1.5px;
+  margin-top: -0.75px;
+  background: rgba(var(--accent-strong-rgb), 0.35);
+  transform-origin: left center;
+  transform: scaleX(0);
+  animation-name: hfs-draw;
+  animation-timing-function: cubic-bezier(0.33, 1, 0.68, 1);
+  animation-fill-mode: forwards;
+}
+
+.hfs-list li {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: hd-fade 0.35s ease-out var(--d) forwards;
+}
+
+.hfs-dot {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  place-items: center;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(var(--accent-strong-rgb), 0.5);
+  background: var(--bg-color);
+  animation: hd-pop 0.35s cubic-bezier(0.33, 1, 0.68, 1) var(--d) both;
+}
+
+.hfs-list li.is-done .hfs-dot {
+  width: 20px;
+  height: 20px;
+  background: rgba(var(--accent-strong-rgb), 0.12);
+}
+
+.hfs-halo {
+  position: absolute;
+  inset: -7px;
+  z-index: -1;
+  border-radius: 50%;
+  background: rgba(var(--accent-strong-rgb), 0.16);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.hfs-list li.is-hit .hfs-halo {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.hfs-dot svg {
+  width: 11px;
+  height: 11px;
+  fill: none;
+  stroke: var(--accent-strong);
+  stroke-width: 1.6;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.hfs-list li.is-checked .hfs-dot svg {
+  opacity: 1;
+}
+
+.hfs-label {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  white-space: nowrap;
+  font-family: var(--font-mono);
+  font-size: 11.5px;
+  letter-spacing: 0.01em;
+  color: var(--accent-strong);
+}
+
+.hfs-list li:nth-child(odd) .hfs-label { bottom: calc(50% + 13px); }
+.hfs-list li:nth-child(even) .hfs-label { top: calc(50% + 13px); }
+
+/* Keep the first label inside the strip's left edge */
+.hfs-list li:first-child .hfs-label {
+  left: calc(50% - 6px);
+  transform: none;
+}
+
+.hfs-runner {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  z-index: 2;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-strong);
+  box-shadow: 0 0 0 4px rgba(var(--accent-strong-rgb), 0.18);
+  opacity: 0;
+  will-change: transform, opacity;
+}
+
+@keyframes hd-draw {
+  to { stroke-dashoffset: 0; }
+}
+
+@keyframes hfs-draw {
+  to { transform: scaleX(1); }
+}
+
+@keyframes hd-fade {
+  to { opacity: 1; }
+}
+
+@keyframes hd-pop {
+  from { transform: scale(0.4); }
+  to { transform: scale(1); }
+}
+
+/* Reduced motion: the finished drawing, no draw-in and no travelling dot */
+@media (prefers-reduced-motion: reduce) {
+  .hd-path { animation: none; stroke-dashoffset: 0; }
+  .hfs-line { animation: none; transform: none; }
+  .hd-node,
+  .hd-sheet,
+  .hfs-list li { animation: none; opacity: 1; }
+  .hd-dot,
+  .hfs-dot { animation: none; }
+  .hd-check,
+  .hfs-dot svg { opacity: 1; transition: none; }
+  .hd-halo,
+  .hfs-halo { transition: none; }
+  .hd-runner,
+  .hfs-runner { display: none; }
+}
